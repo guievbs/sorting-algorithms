@@ -119,9 +119,7 @@ A apresentação dos algoritmos será feita do mais simples ao mais complexo, in
 |----------------------------------------|----------------------------|---------------------------|---------------|
 | 4.1. Preparação da apresentação        | Cada aluno prepara sua parte | 8 horas                  | Preparar uma explicação curta sobre os algoritmos e o projeto. |
 | 4.2. Apresentação para o professor     | Todos                     | 4 horas                   | Apresentar o projeto e responder a perguntas do professor. |
-| 4.3. Feedback e ajustes finais         | Todos                     | 4 horas                   | Realizar ajustes com base no feedback do professor
-
-. |
+| 4.3. Feedback e ajustes finais         | Todos                     | 4 horas                   | Realizar ajustes com base no feedback do professor|
 | 4.4. Encerramento e entrega final      | 1 aluno responsável       | 4 horas                   | Encerrar o projeto e atualizar o GitHub Pages com a versão final. |
 
 ---
