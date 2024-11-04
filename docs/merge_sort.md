@@ -88,4 +88,4 @@ O Merge Sort é amplamente utilizado em cenários onde é necessário um algorit
 
 - [Wikipedia - Merge Sort](https://en.wikipedia.org/wiki/Merge_sort)
 - **Livro**: *Entendendo Algoritmos*, Aditya Y. Bhargava, capítulo 4 - Quick Sort, Página 84.
-- **Vídeo**: "CS50x 2024 - Lecture 3 - Algorithms", disponível no [Youtube](https://www.youtube.com/watch?v=jZzyERW7h1A&t=4613s), conteúdo em inglês.
+- **Vídeo**: "CS50x 2024 - Lecture 3 - Algorithms", disponível no [Youtube](https://youtu.be/jZzyERW7h1A?t=6395), conteúdo em inglês.
