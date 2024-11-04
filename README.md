@@ -1,7 +1,3 @@
-Aqui está uma versão melhorada da sua proposta de projeto, incluindo um índice e algumas melhorias na clareza e estrutura do texto:
-
----
-
 ## **Página Web sobre Algoritmos de Ordenação**  
 
 ### **Índice**  
@@ -66,7 +62,7 @@ A apresentação dos algoritmos será feita do mais simples ao mais complexo, in
 ---
 
 ### **Cronograma de Desenvolvimento**  
-- [ ] **Fase de Planejamento:** Definição de escopo e tecnologias (Aprovação pelo professor).  
+- [x] **Fase de Planejamento:** Definição de escopo e tecnologias (Aprovação pelo professor).  
 - [ ] **Fase de Implementação:** Criação das explicações, códigos e vídeos.  
 - [ ] **Fase de Publicação:** Upload do material e configuração do GitHub Pages.  
 - [ ] **Fase de Entrega Final:** Apresentação pública e validação pelo professor.  
