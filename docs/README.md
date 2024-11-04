@@ -1,6 +1,6 @@
 # Documentação dos Algoritmos de Ordenação
 
-Este diretório contém a documentação completa dos principais algoritmos de ordenação abordados no projeto. 
+Este diretório contém a documentação completa dos principais algoritmos de ordenação abordados no projeto.
 Cada documento fornece uma explicação detalhada do funcionamento de um algoritmo específico, incluindo uma análise de complexidade e potenciais casos de uso.
 
 ---
@@ -40,4 +40,3 @@ Cada documento individual de algoritmo segue uma estrutura padronizada para faci
 ## Licença
 
 Este projeto é licenciado sob a [Licença MIT](../LICENSE)
-
