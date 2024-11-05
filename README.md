@@ -1,5 +1,5 @@
 ## **Página Web sobre Algoritmos de Ordenação**  
-
+![](ordenacao.png) 
 ### **Índice**  
 1. [Objetivo do Projeto](#objetivo-do-projeto)  
 2. [Escopo: Algoritmos de Ordenação](#escopo-algoritmos-de-ordenação)  
