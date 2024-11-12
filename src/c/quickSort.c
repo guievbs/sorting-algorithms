@@ -1,7 +1,13 @@
 #include <stdio.h>
 
-// Troca os valores de duas variáveis entre sí
-void swap(int *a, int *b) {
+/**
+ * Troca os valores de duas variáveis entre sí.
+ *
+ * @param a Primeira variável
+ * @param b Segunda variável
+ */
+void swap(int *a, int *b)
+{
     // Guarda o valor de a em c
     int c = *a;
 
@@ -12,53 +18,93 @@ void swap(int *a, int *b) {
     *b = c;
 }
 
-// Particiona a lista e retorna o ponto de divisão
-int partition(int arr[], int low, int high) {
-    int pivot = arr[high];  // Pivo
+/**
+ * Particiona o array e retorna o índice do ponto de divisão.
+ *
+ * @param arr Array de inteiros a ser particionado
+ * @param low Índice inicial da sublista
+ * @param high Índice final da sublista
+ * @return Índice do ponto de divisão
+ */
+int partition(int arr[], int low, int high)
+{
+    int pivot = arr[high]; // Elemento pivô
 
-    int point = low - 1;    // Ponto de divisão
-
-    // Loop para percorrer toda a lista
-    for (int j = low; j <= high; j++) {
-        if (arr[j] < pivot) {
-            point++;
-
-            // Troca os valores
-            swap(&arr[point], &arr[j]);
+    // Percorre o array para organizar elementos em relação ao pivô
+    int point = low - 1;
+    for (int j = low; j < high; j++)
+    {
+        if (arr[j] <= pivot)
+        {
+            point++;                    // Incrementa o índice do ponto de divisão
+            swap(&arr[point], &arr[j]); // Troca os elementos
         }
     }
 
-    // Troca o pivo com o ponto de divisão
+    // Coloca o pivô em sua posição correta no array
     swap(&arr[point + 1], &arr[high]);
-    return point + 1;    // Ponto de divisão
+    return point + 1; // Retorna o índice do ponto de divisão
 }
 
-// Ordena uma lista de inteiros com o algoritmo Quick Sort.
-int quickSort(int arr[], int low, int high) {
-    if (low < high) {
-        int pt = partition(arr, low, high);  // Ponto de divisão
+/**
+ * Ordena uma lista de inteiros usando o algoritmo Quick Sort.
+ *
+ * @param arr Array de inteiros a ser ordenado
+ * @param low Índice inicial da sublista
+ * @param high Índice final da sublista
+ */
+void quickSort(int arr[], int low, int high)
+{
+    if (low < high)
+    {
+        // Particiona o array e obtém o ponto de divisão
+        int pt = partition(arr, low, high);
 
-        // Recursão
-        quickSort(arr, low, pt - 1);         // Ordena a parte esquerda
-        quickSort(arr, pt + 1, high);        // Ordena a parte direita
+        // Recursivamente ordena a parte esquerda do ponto de divisão
+        quickSort(arr, low, pt - 1);
+
+        // Recursivamente ordena a parte direita do ponto de divisão
+        quickSort(arr, pt + 1, high);
     }
 }
 
-int main() {
+int main()
+{
+    // Conjunto de casos de teste
+    int test_cases[][5] = {
+        {12, 11, 13, 5, 6},
+        {3, 1, 4, 1, 5},
+        {10, 9, 8, 7, 6},
+        {1, 2, 3, 4, 5},
+        {5, 3, 8, 6, 2}
+    };
 
-    int arr[] = {12, 11, 13, 5, 6};  // Lista de números para ordenar
-    int n = sizeof(arr) / sizeof(arr[0]);  // Tamanho da lista
-    
-    printf("Lista antes de ordenar: ");
-    for (int i = 0; i < n; i++) printf("%d ", arr[i]);
-    printf("\n");
+    // Calcula o número de casos de teste
+    int num_cases = sizeof(test_cases) / sizeof(test_cases[0]);
 
-    // Chama a função para ordenar a lista
-    quickSort(arr, 0, n - 1);
+    // Itera sobre cada caso de teste
+    for (int i = 0; i < num_cases; i++)
+    {
+        int *arr = test_cases[i];
+        int n = sizeof(test_cases[i]) / sizeof(test_cases[i][0]);
 
-    printf("Lista ordenada: ");
-    for (int i = 0; i < n; i++) printf("%d ", arr[i]);
-    printf("\n");
+        // Exibe a lista antes da ordenação
+        printf("Lista antes de ordenar: ");
+        for (int j = 0; j < n; j++)
+        {
+            printf("%d ", arr[j]);
+        }
+        printf("\n");
 
-    return 0;
+        // Aplica o Quick Sort na lista
+        quickSort(arr, 0, n - 1);
+
+        // Exibe a lista após a ordenação
+        printf("Lista depois de ordenar: ");
+        for (int j = 0; j < n; j++)
+        {
+            printf("%d ", arr[j]);
+        }
+        printf("\n\n");
+    }
 }
