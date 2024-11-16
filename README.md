@@ -63,7 +63,7 @@ A apresentação dos algoritmos será feita do mais simples ao mais complexo, in
 
 ### **Cronograma de Desenvolvimento**  
 - [x] **Fase de Planejamento:** Definição de escopo e tecnologias (Aprovação pelo professor).  
-- [ ] **Fase de Implementação:** Criação das explicações, códigos e vídeos.  
+- [x] **Fase de Implementação:** Criação das explicações, códigos e vídeos.  
 - [ ] **Fase de Publicação:** Upload do material e configuração do GitHub Pages.  
 - [ ] **Fase de Entrega Final:** Apresentação pública e validação pelo professor.  
 
@@ -91,8 +91,8 @@ A apresentação dos algoritmos será feita do mais simples ao mais complexo, in
 | 2.2. Documentação das implementações (README.md) | **Robson** (Bubble e Insertion) <br> **Marinho** (Counting e Heap) <br> **Floriano** (Quick) <br> **Guilherme** (Merge) | 8 horas (4h por algoritmo) | Explicar os passos da implementação e a lógica por trás dos códigos. |
 | 2.3. Teste e correção dos códigos          | Todos (revisão cruzada)      | 8 horas                   | Testar os códigos implementados por outros membros da equipe e corrigir bugs. |
 | 2.4. Busca de referências de auxílio       | **Robson** <br> **Marinho** <br> **Floriano** <br> **Guilherme** | 4 horas                   | Pesquisa de referências e materiais de apoio sobre os algoritmos. |
-| 2.5. Criação e gravação das vídeo-aulas   | **Guilherme** | 8 horas                   | Criar um vídeo explicando o funcionamento e implementação do algoritmo Merge. |
-| 2.6. Edição e publicação dos vídeos       | 1 aluno responsável pela edição | 4 horas                  | Compilar e publicar o vídeo no YouTube ou plataforma similar. |
+| 2.5. Busca de vídeo-aulas   | **Guilherme** | 8 horas                   | Buscar vídeos explicando o funcionamento e implementação dos algoritmos. |
+| 2.6. Publicação dos vídeos       | 1 aluno responsável pela edição | 4 horas                  | Publicar o vídeo no GitHub Pages. |
 
 ---
 
