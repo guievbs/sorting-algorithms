@@ -1,10 +1,13 @@
 def bubble_sort(arr):
-    # Verifica se a lista está vazia
-    if not arr:
+    if arr is None: # Verifica se a lista é nula
+        print("Entrada inválida: lista é nula.")
+        raise TypeError("Entrada inválida: lista é nula.")
+
+    if not arr: # Verifica se a lista está vazia
         print("A lista está vazia e não há nada para ordenar.")
-        return
+        return None
     
-    n = len(arr)  # Tamanho da lista
+    n = len(arr) # Tamanho da lista
 
     # Loop principal que percorre toda a lista
     for i in range(n - 1):
