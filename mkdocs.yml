@@ -1,7 +1,8 @@
 site_name: "Algoritmos de Ordenação"
-site_url: "https://github.com/guievbs/sorting-algorithms" # Substitua pelo URL do GitHub
+site_url: "https://guievbs.github.io/sorting-algorithms/" # Substitua pelo URL do GitHub
 repo_url: "https://github.com/guievbs/sorting-algorithms" # Substitua pelo URL do GitHub
 repo_name: "sorting-algorithms"
+publish_dir: ./site
 
 theme:
   icon:
