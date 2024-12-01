@@ -1,36 +1,51 @@
-name: ci
+name: CI
+
 on:
   push:
     branches:
-    - main
-  pull_request:
-    branches:
-    - main
+      - master
+      - main
+permissions:
+  contents: write
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12", "3.13"]
+  deploy:
+    runs-on: ubuntu-latest  # Define o ambiente de execução
 
     steps:
-      - name: Copia os arquivos do repo
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Atualização do sistema
-        run: sudo apt update
-        
-      - name: Instalar o python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
+    - name: Configure Git Credentials
+      run: |
+        git config user.name github-actions[bot]
+        git config user.email 41898282+github-actions[bot]@users.noreply.github.com
 
-      - name: Instalar requirements
-        run: pip install -r requirements.txt
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.x  # Define a versão do Python
 
-      - name: Build MkDocs site
-        run: mkdocs build  # Gera o site
+    - name: Cache Python dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip  # Cache os pacotes do pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}  # Chave do cache
+        restore-keys: |
+          ${{ runner.os }}-pip-
 
-      - name: Deploy MkDocs site to GitHub Pages
-        run: mkdocs gh-deploy --force  # Faz o deploy do site para o GitHub Pages
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt  # Instala as dependências do arquivo requirements.txt
+
+    - name: Install MkDocs Material
+      run: pip install mkdocs-material  # Caso precise do mkdocs-material
+
+    - name: Build MkDocs site
+      run: mkdocs build  # Gera o site
+
+    - name: Deploy MkDocs site to GitHub Pages
+      run: mkdocs gh-deploy --force  # Faz o deploy do site para o GitHub Pages
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Token para permitir o deploy para o GitHub Pages
