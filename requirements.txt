@@ -1,0 +1,6 @@
+mkdocs-material
+mkdocs-macros-plugin
+mkdocs-glightbox
+mkdocs-video
+mkdocs-git-revision-date-localized-plugin
+mkdocs-exclude
