@@ -1,91 +1,195 @@
-# Algoritmo de Ordenação: Merge Sort
+# Merge Sort
 
-## Índice
+## 📖 Introdução
 
-1. [Introdução](#introdução)
-2. [Funcionamento do Algoritmo](#funcionamento-do-algoritmo)
-3. [Complexidade](#complexidade)
-4. [Implementação](#implementação)
-   - [Python](https://github.com/guievbs/sorting-algorithms/tree/main/src/python/merge_sort.py)
-   - [C](https://github.com/guievbs/sorting-algorithms/blob/main/src/c/merge_sort.c)
-5. [Casos de Uso](#casos-de-uso)
-6. [Vantagens e Desvantagens](#vantagens-e-desvantagens)
-7. [Referências](#referências)
-
----
-
-## Introdução
-
-O **Merge Sort** é um algoritmo de ordenação eficiente que utiliza a técnica de **divisão e conquista**. É particularmente útil para grandes conjuntos de dados devido à sua complexidade logarítmica, sendo também estável, ou seja, mantém a ordem relativa dos elementos iguais. Em sistemas críticos e ambientes que exigem alta eficiência, o Merge Sort é frequentemente preferido por sua previsibilidade e consistência em tempo de execução.
+O **Merge Sort** é um algoritmo de ordenação eficiente baseado na técnica de **divisão e conquista**. Ele divide a lista original em sublistas, ordena-as recursivamente e, em seguida, combina as sublistas ordenadas. Este algoritmo é amplamente utilizado em aplicações que exigem alta eficiência e estabilidade.
 
 ---
 
 ## Funcionamento do Algoritmo
 
-### Descrição
-
-O algoritmo funciona dividindo a lista a ser ordenada em sublistas cada vez menores, até que cada sublista contenha apenas um elemento, que por definição está ordenado. Em seguida, ele realiza a fase de **mesclagem** das sublistas de maneira ordenada para reconstruir a lista original, agora totalmente ordenada.
-
 ### Passo a Passo
 
-1. **Divisão**: Se a lista tiver mais de um elemento, ela é dividida ao meio, criando duas sublistas.
-2. **Conquista**: As duas sublistas são ordenadas recursivamente utilizando o próprio Merge Sort.
-3. **Combinação (Merge)**: As sublistas ordenadas são combinadas em uma única lista ordenada, comparando os elementos das duas listas e inserindo o menor deles na lista resultante.
+1. **🪓 Divisão**: Divida a lista ao meio até que cada sublista tenha apenas um elemento.
+2. **🤝 Conquista**: Ordene cada sublista recursivamente.
+3. **🔗 Mesclagem (Merge)**: Combine as sublistas ordenadas comparando os elementos e organizando-os em ordem crescente.
 
-Esse processo se repete recursivamente até que toda a lista original esteja ordenada.
+**Exemplo de Divisão e Mesclagem:**
 
----
+Lista original: `[38, 27, 43, 3, 9, 82, 10]`
 
-## Complexidade
-
-A análise de complexidade do Merge Sort considera as operações de divisão e mesclagem dos elementos:
-
-- **Melhor Caso**: `O(n log n)` - Todos os elementos são processados de maneira previsível.
-- **Pior Caso**: `O(n log n)` - O Merge Sort sempre executa a mesma quantidade de operações, independentemente da organização dos dados.
-- **Caso Médio**: `O(n log n)` - A complexidade permanece constante em qualquer cenário, tornando-o altamente eficiente e previsível.
-
-O Merge Sort requer um espaço adicional de `O(n)` para realizar as operações de mesclagem, o que pode ser um fator limitante em aplicações com grandes volumes de dados.
+1. **Divisão**:  
+   `[38, 27, 43]` e `[3, 9, 82, 10]`  
+   `[38]`, `[27, 43]` e `[3, 9]`, `[82, 10]`
+2. **Mesclagem**:  
+   `[27, 38, 43]` e `[3, 9, 10, 82]`  
+   `[3, 9, 10, 27, 38, 43, 82]`
 
 ---
 
-## Implementação
+## 📊 Complexidade
 
-Abaixo, temos links para as implementações em diferentes linguagens:
+- **Melhor Caso**: `O(n log n)`
+- **Pior Caso**: `O(n log n)`
+- **Caso Médio**: `O(n log n)`
 
-- **Python**: [Implementação em Python](https://github.com/guievbs/sorting-algorithms/tree/main/src/python)
-- **C**: [Implementação em C](https://github.com/guievbs/sorting-algorithms/tree/main/src/c)
-
-Esses códigos demonstram como o Merge Sort é implementado de forma recursiva, mantendo sua estrutura clara e modular.
-
----
-
-## Casos de Uso
-
-O Merge Sort é amplamente utilizado em cenários onde é necessário um algoritmo de ordenação estável e eficiente:
-
-1. **Sistemas de gerenciamento de bancos de dados**: Ideal para ordenar grandes conjuntos de dados de forma eficiente e previsível.
-2. **Algoritmos de ordenação interna**: Serve como base para algoritmos mais complexos e técnicas de otimização de dados.
-3. **Bibliotecas de programação**: Muitas bibliotecas padrão incluem o Merge Sort para realizar operações de ordenação de alta performance, especialmente para grandes volumes de dados.
+O Merge Sort requer **espaço adicional** de `O(n)` devido à criação de sublistas para mesclagem.
 
 ---
 
-## Vantagens e Desvantagens
+## 💻 Implementação
 
-### Vantagens
+### Python
 
-- **Eficiência garantida**: O Merge Sort sempre apresenta complexidade `O(n log n)`.
-- **Estabilidade**: Mantém a ordem dos elementos iguais, o que pode ser importante em determinados contextos.
-- **Aplicável a grandes conjuntos de dados**: É especialmente eficaz para ordenar listas de tamanho considerável.
+A implementação em Python demonstra a simplicidade do algoritmo com recursão:
 
-### Desvantagens
+```python
+def merge_sort(array):
+    """
+    Implementa o algoritmo Merge Sort para ordenar uma lista.
+    Complexidade de tempo: O(n log n)
+    """
+    if len(array) <= 1:
+        return array
 
-- **Requer memória adicional**: A mesclagem de sublistas exige espaço extra, o que pode ser problemático em sistemas com limitações de memória.
-- **Não é o mais rápido para listas pequenas**: Para listas menores, o Merge Sort pode ser menos eficiente em comparação a outros algoritmos, como o Insertion Sort.
+    meio = len(array) // 2
+    esquerda = array[:meio]
+    direita = array[meio:]
+
+    esquerda = merge_sort(esquerda)
+    direita = merge_sort(direita)
+
+    return merge(esquerda, direita)
+
+
+def merge(esquerda, direita):
+    resultado = []
+    i = j = 0
+
+    while i < len(esquerda) and j < len(direita):
+        if esquerda[i] <= direita[j]:
+            resultado.append(esquerda[i])
+            i += 1
+        else:
+            resultado.append(direita[j])
+            j += 1
+
+    resultado.extend(esquerda[i:])
+    resultado.extend(direita[j:])
+    return resultado
+
+
+# Exemplo de uso
+if __name__ == "__main__":
+    lista = [64, 342, 25, 991, 12, 661, 22, 11, 90, 1, 6, 44, 192, 813]
+    print("Lista original:", lista)
+    print("Lista ordenada:", merge_sort(lista))
+```
+
+**Explicação do Código:**
+
+1. O array é dividido em duas metades.
+2. Cada metade é ordenada recursivamente.
+3. As duas metades são mescladas comparando os elementos em ordem crescente.
 
 ---
 
-## Referências
+### C
+
+A implementação em C é ideal para entender como o algoritmo funciona em nível mais baixo:
+
+```c
+#include <stdio.h>
+
+void merge(int arr[], int left, int mid, int right) {
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+
+    int L[n1], R[n2];
+
+    for (int i = 0; i < n1; i++) L[i] = arr[left + i];
+    for (int j = 0; j < n2; j++) R[j] = arr[mid + 1 + j];
+
+    int i = 0, j = 0, k = left;
+
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) arr[k++] = L[i++];
+        else arr[k++] = R[j++];
+    }
+
+    while (i < n1) arr[k++] = L[i++];
+    while (j < n2) arr[k++] = R[j++];
+}
+
+void merge_sort(int arr[], int left, int right) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+
+        merge_sort(arr, left, mid);
+        merge_sort(arr, mid + 1, right);
+
+        merge(arr, left, mid, right);
+    }
+}
+
+int main() {
+    int arr[] = {12, 11, 13, 5, 6, 7};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Lista antes da ordenação: ");
+    for (int i = 0; i < n; i++) printf("%d ", arr[i]);
+    printf("\n");
+
+    merge_sort(arr, 0, n - 1);
+
+    printf("Lista após a ordenação: ");
+    for (int i = 0; i < n; i++) printf("%d ", arr[i]);
+    printf("\n");
+
+    return 0;
+}
+```
+
+**Explicação do Código:**
+
+1. O array é dividido usando índices.
+2. A função merge combina subarrays ordenados em um único array.
+
+---
+
+## 🛠️ Casos de Uso
+
+- Ordenação em **sistemas críticos** que exigem alta previsibilidade.
+- Ordenação de **grandes volumes de dados** devido à sua eficiência em `O(n log n)`.
+- Ambientes que precisam de um algoritmo **estável**.
+
+---
+
+## ⚖️ Vantagens e Desvantagens
+
+### ✅ Vantagens
+
+- Complexidade consistente: `O(n log n)` em qualquer cenário.
+- Estável: Mantém a ordem relativa de elementos iguais.
+- Excelente para grandes conjuntos de dados.
+
+### ❌ Desvantagens
+
+- Consome mais memória devido à criação de sublistas.
+- Menos eficiente para listas pequenas.
+
+---
+
+## 🎥 Vídeo Explicativo
+
+![type:video](https://www.youtube.com/embed/a5LfKZp34d8?si=LkG0qozM1DC3OnU9)
+
+[:fontawesome-brands-youtube: Link direto](https://www.youtube.com/watch?v=a5LfKZp34d8&t=1s){ .md-button }
+
+---
+
+## 📚 Referências
 
 - [Wikipedia - Merge Sort](https://en.wikipedia.org/wiki/Merge_sort)
-- **Livro**: *Entendendo Algoritmos*, Aditya Y. Bhargava, capítulo 4 - Quick Sort, Página 84.
-- **Vídeo**: "CS50x 2024 (Harvard) - Lecture 3 - Algorithms", disponível no [Youtube](https://youtu.be/jZzyERW7h1A?t=6395), conteúdo em inglês.
+- **Livro:** _Entendendo Algoritmos_, Aditya Y. Bhargava.
+- **Vídeo:** [CS50x - Lecture 3 - Algorithms](https://youtu.be/jZzyERW7h1A?t=6395)
