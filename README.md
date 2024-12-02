@@ -64,7 +64,7 @@ A apresentação dos algoritmos será feita do mais simples ao mais complexo, in
 ### **Cronograma de Desenvolvimento**  
 - [x] **Fase de Planejamento:** Definição de escopo e tecnologias (Aprovação pelo professor).  
 - [x] **Fase de Implementação:** Criação das explicações, códigos e vídeos.  
-- [ ] **Fase de Publicação:** Upload do material e configuração do GitHub Pages.  
+- [x] **Fase de Publicação:** Upload do material e configuração do GitHub Pages.  
 - [ ] **Fase de Entrega Final:** Apresentação pública e validação pelo professor.  
 
 ---
