@@ -54,39 +54,42 @@ Aqui está uma implementação do **Counting Sort** em Python:
 
 ```python
 def counting_sort(arr):
-    """
-    Implementa o algoritmo Counting Sort para ordenar uma lista.
-    Complexidade de tempo: O(n + k), onde n é o número de elementos e k é o valor máximo.
-    """
-    # Se a lista estiver vazia, retorna imediatamente
-    if not arr:
-        return arr
-
-    # Encontra o maior valor na lista
+    # Encontrar o maior valor no array para definir o tamanho do array auxiliar
     max_val = max(arr)
 
-    # Cria a lista de contagem com o tamanho do maior valor + 1
+    # Criar um array auxiliar para armazenar as contagens, inicializado com 0
     count = [0] * (max_val + 1)
 
-    # Conta a ocorrência de cada elemento
+    # Contar a ocorrência de cada elemento no array original
     for num in arr:
         count[num] += 1
 
-    # Reconstrói a lista ordenada
-    sorted_arr = []
-    for num, freq in enumerate(count):
-        sorted_arr.extend([num] * freq)
+    # Modificar o array count para armazenar as posições corretas dos elementos
+    for i in range(1, len(count)):
+        count[i] += count[i - 1]
 
-    return sorted_arr
+    # Criar um array para o resultado final ordenado
+    output = [0] * len(arr)
+    for num in reversed(
+        arr
+    ):  # Percorrer de trás para frente para garantir estabilidade
+        output[count[num] - 1] = num
+        count[num] -= 1
+
+    # Copiar o array ordenado de volta para o array original
+    for i in range(len(arr)):
+        arr[i] = output[i]
 
 
 # Exemplo de uso
-if __name__ == "__main__":
-    lista = [4, 2, 2, 8, 3, 3, 1, 5]
-    print("Lista original:", lista)
+arr = [4, 2, 2, 8, 3, 3, 1]
+print("Array original:")
+print(arr)
 
-    lista_ordenada = counting_sort(lista)
-    print("Lista ordenada:", lista_ordenada)
+counting_sort(arr)
+
+print("Array ordenado:")
+print(arr)
 ```
 
 **Explicação do Código:**
@@ -103,66 +106,66 @@ Aqui está a implementação do **Counting Sort** em C:
 
 ```c
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
 
-/**
- * Implementa o algoritmo Counting Sort em C para ordenar uma lista.
- *
- * @param arr Array de inteiros a ser ordenado
- * @param n Tamanho do array
- */
-void counting_sort(int arr[], int n)
-{
-    // Encontra o maior valor na lista
-    int max_val = arr[0];
-    for (int i = 1; i < n; i++)
-    {
-        if (arr[i] > max_val)
-            max_val = arr[i];
-    }
-
-    // Cria a lista de contagem com o tamanho do maior valor + 1
-    int *count = (int *)calloc(max_val + 1, sizeof(int));
-
-    // Conta as ocorrências de cada elemento
-    for (int i = 0; i < n; i++)
-    {
-        count[arr[i]]++;
-    }
-
-    // Reconstrói a lista ordenada
-    int idx = 0;
-    for (int i = 0; i <= max_val; i++)
-    {
-        while (count[i] > 0)
-        {
-            arr[idx++] = i;
-            count[i]--;
+void counting_sort(int arr[], int n) {
+    // Encontrar o maior valor no array para definir o tamanho do array auxiliar
+    int max = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
         }
     }
 
-    free(count); // Libera a memória alocada
+    // Criar um array auxiliar para armazenar as contagens, inicializado com 0
+    int count[max + 1];
+    memset(count, 0, sizeof(count));
+
+    // Contar a ocorrência de cada elemento no array original
+    for (int i = 0; i < n; i++) {
+        count[arr[i]]++;
+    }
+
+    // Modificar o array count para armazenar as posições corretas dos elementos
+    for (int i = 1; i <= max; i++) {
+        count[i] += count[i - 1];
+    }
+
+    // Criar um array para o resultado final ordenado
+    int output[n];
+    for (int i = n - 1; i >= 0; i--) {
+        output[count[arr[i]] - 1] = arr[i];
+        count[arr[i]]--;
+    }
+
+    // Copiar o array ordenado de volta para o array original
+    for (int i = 0; i < n; i++) {
+        arr[i] = output[i];
+    }
 }
 
-int main()
-{
-    int arr[] = {4, 2, 2, 8, 3, 3, 1, 5};
+// Função principal para testes
+int main() {
+    int arr[] = {4, 2, 2, 8, 3, 3, 1};
     int n = sizeof(arr) / sizeof(arr[0]);
 
-    printf("Lista original: ");
-    for (int i = 0; i < n; i++)
+    printf("Array original:\n");
+    for (int i = 0; i < n; i++) {
         printf("%d ", arr[i]);
+    }
     printf("\n");
 
     counting_sort(arr, n);
 
-    printf("Lista ordenada: ");
-    for (int i = 0; i < n; i++)
+    printf("Array ordenado:\n");
+    for (int i = 0; i < n; i++) {
         printf("%d ", arr[i]);
+    }
     printf("\n");
 
     return 0;
 }
+
 ```
 
 **Explicação do Código:**
