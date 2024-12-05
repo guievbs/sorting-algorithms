@@ -43,40 +43,55 @@ A complexidade de tempo do Quick Sort pode ser `O(n log n)` no melhor e caso mé
 Aqui está a implementação do **Quick Sort** em Python:
 
 ```python
-def quick_sort(arr):
+def partition(arr: list[int], low: int, high: int) -> int:
     """
-    Implementa o algoritmo Quick Sort para ordenar uma lista.
-    Complexidade de tempo: O(n log n) no melhor caso, O(n²) no pior caso
+    Particiona o array e retorna o índice do ponto de divisão.
+
+    Parameters:
+        arr (list[int]): Array de inteiros a ser particionado
+        low (int): Índice inicial da sublista
+        high (int): Índice final da sublista
+
+    Returns:
+        int: Índice do ponto de divisão
     """
-    if len(arr) <= 1:
-        return arr
+    pivot = arr[high]
 
-    # Escolhe o pivô (último elemento da lista)
-    pivô = arr[-1]
-    esquerda = []
-    direita = []
-    meio = []
+    point = low - 1
 
-    # Particiona os elementos em relação ao pivô
-    for num in arr:
-        if num < pivô:
-            esquerda.append(num)
-        elif num > pivô:
-            direita.append(num)
-        else:
-            meio.append(num)
+    for i in range(low, high):
+        if arr[i] < pivot:
+            point += 1
+            arr[i], arr[point] = arr[point], arr[i]
 
-    # Recursivamente aplica o Quick Sort nas sublistas
-    return quick_sort(esquerda) + meio + quick_sort(direita)
+    arr[point + 1], arr[high] = arr[high], arr[point + 1]
+    return point + 1
 
+def quick_sort(arr: list, low: int, high: int) -> None:
+    """
+    Ordena o array utilizando o algoritmo Quick Sort.
 
-# Exemplo de uso
+    Parameters:
+        arr (list): Array de inteiros a ser ordenado
+        low (int): Índice inicial da sublista
+        high (int): Índice final da sublista
+    """
+    if low < high:
+        point = partition(arr, low, high)  # Ponto de divisão
+
+        quick_sort(arr, low, point - 1)  # Ordena a parte esquerda do ponto de divisão
+        quick_sort(arr, point + 1, high)  # Ordena a parte direita do ponto de divisão
+
+# Faz com que o algoritmo seja executado diretamente
 if __name__ == "__main__":
-    lista = [10, 7, 8, 9, 1, 5]
-    print("Lista original:", lista)
+    arr = [12, 11, 13, 5, 6]
+    
+    print("Lista antes de ordenar:", arr)
+    
+    quick_sort(arr, 0, len(arr) - 1)
+    
+    print("Lista ordenada:", arr)
 
-    lista_ordenada = quick_sort(lista)
-    print("Lista ordenada:", lista_ordenada)
 ```
 
 **Explicação do Código:**
@@ -96,84 +111,114 @@ Aqui está a implementação do **Quick Sort** em C:
 #include <stdio.h>
 
 /**
- * Função para realizar a troca de dois elementos no array.
+ * Troca os valores de duas variáveis entre sí.
  *
- * @param a Ponteiro para o primeiro elemento
- * @param b Ponteiro para o segundo elemento
+ * @param a Primeira variável
+ * @param b Segunda variável
  */
 void swap(int *a, int *b)
 {
-    int temp = *a;
+    // Guarda o valor de a em c
+    int c = *a;
+
+    // Coloca o valor de b em a
     *a = *b;
-    *b = temp;
+
+    // Coloca o valor de c(a) em b
+    *b = c;
 }
 
 /**
- * Função de particionamento do array em torno de um pivô.
+ * Particiona o array e retorna o índice do ponto de divisão.
  *
  * @param arr Array de inteiros a ser particionado
- * @param low Índice inicial da lista
- * @param high Índice final da lista
- * @return O índice do pivô após a partição
+ * @param low Índice inicial da sublista
+ * @param high Índice final da sublista
+ * @return Índice do ponto de divisão
  */
 int partition(int arr[], int low, int high)
 {
-    int pivot = arr[high]; // Pivô é o último elemento
-    int i = low - 1; // Índice do menor elemento
+    int pivot = arr[high]; // Elemento pivô
 
-    // Organiza os elementos em relação ao pivô
+    // Percorre o array para organizar elementos em relação ao pivô
+    int point = low - 1;
     for (int j = low; j < high; j++)
     {
-        if (arr[j] < pivot)
+        if (arr[j] <= pivot)
         {
-            i++;
-            swap(&arr[i], &arr[j]);
+            point++;                    // Incrementa o índice do ponto de divisão
+            swap(&arr[point], &arr[j]); // Troca os elementos
         }
     }
 
-    swap(&arr[i + 1], &arr[high]); // Coloca o pivô em sua posição final
-    return i + 1;
+    // Coloca o pivô em sua posição correta no array
+    swap(&arr[point + 1], &arr[high]);
+    return point + 1; // Retorna o índice do ponto de divisão
 }
 
 /**
- * Função recursiva para aplicar o Quick Sort.
+ * Ordena uma lista de inteiros usando o algoritmo Quick Sort.
  *
  * @param arr Array de inteiros a ser ordenado
- * @param low Índice inicial da lista
- * @param high Índice final da lista
+ * @param low Índice inicial da sublista
+ * @param high Índice final da sublista
  */
-void quick_sort(int arr[], int low, int high)
+void quickSort(int arr[], int low, int high)
 {
     if (low < high)
     {
-        // Particiona o array e obtém o índice do pivô
-        int pi = partition(arr, low, high);
+        // Particiona o array e obtém o ponto de divisão
+        int pt = partition(arr, low, high);
 
-        // Recursivamente ordena as duas sublistas
-        quick_sort(arr, low, pi - 1);
-        quick_sort(arr, pi + 1, high);
+        // Recursivamente ordena a parte esquerda do ponto de divisão
+        quickSort(arr, low, pt - 1);
+
+        // Recursivamente ordena a parte direita do ponto de divisão
+        quickSort(arr, pt + 1, high);
     }
 }
 
 int main()
 {
-    int arr[] = {10, 7, 8, 9, 1, 5};
-    int n = sizeof(arr) / sizeof(arr[0]);
+    // Conjunto de casos de teste
+    int test_cases[][5] = {
+        {12, 11, 13, 5, 6},
+        {3, 1, 4, 1, 5},
+        {10, 9, 8, 7, 6},
+        {1, 2, 3, 4, 5},
+        {5, 3, 8, 6, 2}
+    };
 
-    printf("Lista original: ");
-    for (int i = 0; i < n; i++)
-        printf("%d ", arr[i]);
-    printf("\n");
+    // Calcula o número de casos de teste
+    int num_cases = sizeof(test_cases) / sizeof(test_cases[0]);
 
-    quick_sort(arr, 0, n - 1);
+    // Itera sobre cada caso de teste
+    for (int i = 0; i < num_cases; i++)
+    {
+        int *arr = test_cases[i];
+        int n = sizeof(test_cases[i]) / sizeof(test_cases[i][0]);
 
-    printf("Lista ordenada: ");
-    for (int i = 0; i < n; i++)
-        printf("%d ", arr[i]);
-    printf("\n");
+        // Exibe a lista antes da ordenação
+        printf("Lista antes de ordenar: ");
+        for (int j = 0; j < n; j++)
+        {
+            printf("%d ", arr[j]);
+        }
+        printf("\n");
 
-    return 0;
+        // Aplica o Quick Sort na lista
+        quickSort(arr, 0, n - 1);
+
+        // Exibe a lista após a ordenação
+        printf("Lista depois de ordenar: ");
+        for (int j = 0; j < n; j++)
+        {
+            printf("%d ", arr[j]);
+        }
+        printf("\n\n");
+    }
 }
+
 ```
 
 **Explicação do Código:**
