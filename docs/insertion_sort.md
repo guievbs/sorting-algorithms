@@ -50,32 +50,25 @@ Aqui está uma implementação do **Insertion Sort** em Python:
 
 ```python
 def insertion_sort(arr):
-    """
-    Implementa o algoritmo Insertion Sort para ordenar uma lista.
-    Complexidade de tempo: O(n^2) no pior caso.
-    """
+    # Percorre cada elemento da lista, começando do segundo
     for i in range(1, len(arr)):
-        chave = arr[i]
-        j = i - 1
+        key = arr[i]  # Seleciona o número que vamos ordenar
+        j = i - 1  # Posição do elemento à esquerda da "key"
 
-        # Move os elementos da lista para a direita, até a posição correta de "chave"
-        while j >= 0 and arr[j] > chave:
-            arr[j + 1] = arr[j]
-            j -= 1
+        # Enquanto o número da esquerda for maior que a "key"
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]  # Mova esse número para a direita
+            j -= 1  # Volte uma posição para comparar o próximo
 
-        # Coloca a chave na posição correta
-        arr[j + 1] = chave
+        # Coloca a "key" na posição correta
+        arr[j + 1] = key
 
-    return arr
+# Exemplo para testar o algoritmo
+arr = [12, 11, 13, 5, 6]
+print("Lista antes de ordenar:", arr)
+insertion_sort(arr)
+print("Lista ordenada:", arr)
 
-
-# Exemplo de uso
-if __name__ == "__main__":
-    lista = [5, 2, 9, 1, 5, 6]
-    print("Lista original:", lista)
-
-    lista_ordenada = insertion_sort(lista)
-    print("Lista ordenada:", lista_ordenada)
 ```
 
 **Explicação do Código:**
@@ -93,50 +86,41 @@ Aqui está a implementação do **Insertion Sort** em C:
 ```c
 #include <stdio.h>
 
-/**
- * Implementa o algoritmo Insertion Sort para ordenar uma lista.
- *
- * @param arr Array de inteiros a ser ordenado
- * @param n Tamanho do array
- */
-void insertion_sort(int arr[], int n)
-{
-    for (int i = 1; i < n; i++)
-    {
-        int chave = arr[i];
-        int j = i - 1;
+void insertionSort(int arr[], int n) {
+    // Vamos começar do segundo elemento (posição 1)
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];  // Escolhemos um número para ordenar
+        int j = i - 1;     // Posição do número à esquerda
 
-        // Move os elementos de arr[0..i-1], que são maiores que chave, uma posição à frente
-        while (j >= 0 && arr[j] > chave)
-        {
-            arr[j + 1] = arr[j];
-            j--;
+        // Enquanto o número à esquerda for maior que o número escolhido
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];  // Mova o número para a direita
+            j--;                  // Ande uma posição para trás
         }
 
-        // Coloca a chave na posição correta
-        arr[j + 1] = chave;
+        // Coloca o número escolhido na posição certa
+        arr[j + 1] = key;
     }
 }
 
-int main()
-{
-    int arr[] = {5, 2, 9, 1, 5, 6};
-    int n = sizeof(arr) / sizeof(arr[0]);
+int main() {
+    int arr[] = {12, 11, 13, 5, 6};  // Lista de números para ordenar
+    int n = sizeof(arr) / sizeof(arr[0]);  // Tamanho da lista
 
-    printf("Lista original: ");
-    for (int i = 0; i < n; i++)
-        printf("%d ", arr[i]);
+    printf("Lista antes de ordenar: ");
+    for (int i = 0; i < n; i++) printf("%d ", arr[i]);
     printf("\n");
 
-    insertion_sort(arr, n);
+    // Chama a função para ordenar a lista
+    insertionSort(arr, n);
 
     printf("Lista ordenada: ");
-    for (int i = 0; i < n; i++)
-        printf("%d ", arr[i]);
+    for (int i = 0; i < n; i++) printf("%d ", arr[i]);
     printf("\n");
 
     return 0;
 }
+
 ```
 
 **Explicação do Código:**
