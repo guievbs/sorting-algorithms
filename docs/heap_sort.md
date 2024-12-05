@@ -49,53 +49,45 @@ Aqui está uma implementação do **Heap Sort** em Python:
 
 ```python
 def heapify(arr, n, i):
-    """
-    Converte um subárvore em um heap máximo.
-    """
-    largest = i
-    left = 2 * i + 1
-    right = 2 * i + 2
+    largest = i         # Inicializa o maior como raiz
+    left = 2 * i + 1    # Filho à esquerda
+    right = 2 * i + 2   # Filho à direita
 
-    # Verifica se o filho à esquerda é maior que o pai
+    # Se o filho à esquerda for maior que a raiz
     if left < n and arr[left] > arr[largest]:
         largest = left
 
-    # Verifica se o filho à direita é maior que o maior até agora
+    # Se o filho à direita for maior que o maior até agora
     if right < n and arr[right] > arr[largest]:
         largest = right
 
-    # Se o maior não for o elemento atual, troca e chama heapify novamente
+    # Se o maior não for a raiz
     if largest != i:
         arr[i], arr[largest] = arr[largest], arr[i]  # Troca
-        heapify(arr, n, largest)
-
+        heapify(arr, n, largest)  # Aplica heapify na subárvore afetada
 
 def heap_sort(arr):
-    """
-    Implementa o algoritmo Heap Sort para ordenar uma lista.
-    Complexidade de tempo: O(n log n)
-    """
     n = len(arr)
 
-    # Construção do heap máximo
+    # Construir o heap (reorganizar o array)
     for i in range(n // 2 - 1, -1, -1):
         heapify(arr, n, i)
 
-    # Extração dos elementos um a um
+    # Extrair um elemento de cada vez do heap
     for i in range(n - 1, 0, -1):
-        arr[i], arr[0] = arr[0], arr[i]  # Troca o maior com o último elemento
-        heapify(arr, i, 0)  # Reorganiza o heap
-
-    return arr
-
+        arr[i], arr[0] = arr[0], arr[i]  # Move a raiz para o final
+        heapify(arr, i, 0)  # Chama heapify no heap reduzido
 
 # Exemplo de uso
-if __name__ == "__main__":
-    lista = [4, 10, 3, 5, 1]
-    print("Lista original:", lista)
+arr = [12, 11, 13, 5, 6, 7]
+print("Array original:")
+print(arr)
 
-    lista_ordenada = heap_sort(lista)
-    print("Lista ordenada:", lista_ordenada)
+heap_sort(arr)
+
+print("Array ordenado:")
+print(arr)
+
 ```
 
 **Explicação do Código:**
@@ -114,82 +106,72 @@ Aqui está a implementação do **Heap Sort** em C:
 ```c
 #include <stdio.h>
 
-/**
- * Função auxiliar para manter a propriedade do heap máximo.
- *
- * @param arr Array de inteiros a ser ordenado
- * @param n Tamanho do array
- * @param i Índice do nó a ser reorganizado
- */
-void heapify(int arr[], int n, int i)
-{
-    int largest = i;
-    int left = 2 * i + 1;
-    int right = 2 * i + 2;
+void heapify(int arr[], int n, int i) {
+    int largest = i;           // Inicializa o maior como raiz
+    int left = 2 * i + 1;      // Filho à esquerda
+    int right = 2 * i + 2;     // Filho à direita
 
-    // Verifica se o filho à esquerda é maior que o pai
-    if (left < n && arr[left] > arr[largest])
+    // Se o filho à esquerda é maior que a raiz
+    if (left < n && arr[left] > arr[largest]) {
         largest = left;
+    }
 
-    // Verifica se o filho à direita é maior que o maior até agora
-    if (right < n && arr[right] > arr[largest])
+    // Se o filho à direita é maior que o maior até agora
+    if (right < n && arr[right] > arr[largest]) {
         largest = right;
+    }
 
-    // Se o maior não for o elemento atual, troca e chama heapify novamente
-    if (largest != i)
-    {
+    // Se o maior não for a raiz
+    if (largest != i) {
         int temp = arr[i];
         arr[i] = arr[largest];
         arr[largest] = temp;
 
+        // Chama heapify na subárvore afetada
         heapify(arr, n, largest);
     }
 }
 
-/**
- * Implementa o algoritmo Heap Sort para ordenar uma lista.
- *
- * @param arr Array de inteiros a ser ordenado
- * @param n Tamanho do array
- */
-void heap_sort(int arr[], int n)
-{
-    // Construção do heap máximo
-    for (int i = n / 2 - 1; i >= 0; i--)
+void heap_sort(int arr[], int n) {
+    // Constrói o heap (reorganiza o array)
+    for (int i = n / 2 - 1; i >= 0; i--) {
         heapify(arr, n, i);
+    }
 
-    // Extração dos elementos do heap
-    for (int i = n - 1; i > 0; i--)
-    {
-        // Troca o maior com o último elemento
+    // Extrai um elemento de cada vez do heap
+    for (int i = n - 1; i > 0; i--) {
+        // Move a raiz atual para o final
         int temp = arr[0];
         arr[0] = arr[i];
         arr[i] = temp;
 
-        // Reorganiza o heap
+        // Chama heapify no heap reduzido
         heapify(arr, i, 0);
     }
 }
 
-int main()
-{
-    int arr[] = {4, 10, 3, 5, 1};
+// Função principal para testes
+int main() {
+    int arr[] = {12, 11, 13, 5, 6, 7};
     int n = sizeof(arr) / sizeof(arr[0]);
 
-    printf("Lista original: ");
-    for (int i = 0; i < n; i++)
+    printf("Array original:\n");
+    for (int i = 0; i < n; i++) {
         printf("%d ", arr[i]);
+    }
     printf("\n");
 
     heap_sort(arr, n);
 
-    printf("Lista ordenada: ");
-    for (int i = 0; i < n; i++)
+    printf("Array ordenado:\n");
+    for (int i = 0; i < n; i++) {
         printf("%d ", arr[i]);
+    }
     printf("\n");
 
     return 0;
 }
+
 ```
 
 **Explicação do Código:**
