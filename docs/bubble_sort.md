@@ -61,27 +61,36 @@ Aqui está uma implementação do **Bubble Sort** em Python:
 
 ```python
 def bubble_sort(arr):
-    """
-    Implementa o algoritmo Bubble Sort para ordenar uma lista.
-    Complexidade de tempo: O(n^2)
-    """
-    n = len(arr)
-    # Percorre a lista
-    for i in range(n):
-        # A cada iteração, a maior parte da lista já está ordenada
-        for j in range(0, n-i-1):
-            if arr[j] > arr[j+1]:
-                arr[j], arr[j+1] = arr[j+1], arr[j]  # Troca os elementos
-    return arr
+    if arr is None: # Verifica se a lista é nula
+        print("Entrada inválida: lista é nula.")
+        raise TypeError("Entrada inválida: lista é nula.")
 
+    if not arr: # Verifica se a lista está vazia
+        print("A lista está vazia e não há nada para ordenar.")
+        return None
+    
+    n = len(arr) # Tamanho da lista
 
-# Exemplo de uso
-if __name__ == "__main__":
-    lista = [64, 342, 25, 991, 12, 661, 22, 11, 90, 1, 6, 44, 192, 813]
-    print("Lista original:", lista)
+    # Loop principal que percorre toda a lista
+    for i in range(n - 1):
+        # Um segundo loop que compara cada par de elementos
+        for j in range(n - 1 - i):
+            # Se o elemento atual é maior que o próximo, troca de posição
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]  # Troca de posição
 
-    lista_ordenada = bubble_sort(lista)
-    print("Lista ordenada:", lista_ordenada)
+# Exemplo para testar o algoritmo
+arr = []  # Teste com lista vazia
+print("Lista antes de ordenar:", arr)
+bubble_sort(arr)
+print("Lista depois de ordenar:", arr)
+
+# Outro exemplo com lista preenchida
+arr = [64, 34, 25, 12, 22, 11, 90]
+print("\nLista antes de ordenar:", arr)
+bubble_sort(arr)
+print("Lista depois de ordenar:", arr)
+
 ```
 
 **Explicação do Código:**
@@ -99,45 +108,53 @@ Aqui está a implementação do **Bubble Sort** em C:
 ```c
 #include <stdio.h>
 
-/**
- * Implementa o algoritmo Bubble Sort em C para ordenar uma lista.
- *
- * @param arr Array de inteiros a ser ordenado
- * @param n Tamanho do array
- */
-void bubble_sort(int arr[], int n)
-{
-    for (int i = 0; i < n-1; i++)
-    {
-        // Percorre a lista e compara elementos adjacentes
-        for (int j = 0; j < n-i-1; j++)
-        {
-            if (arr[j] > arr[j+1])
-            {
-                // Troca os elementos
-                int temp = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = temp;
+void bubbleSort(int arr[], int n) {
+    // Verifica se o array está vazio
+    if (n == 0) {
+        printf("O array está vazio e não há nada para ordenar.\n");
+        return;
+    }
+
+    // Loop para percorrer toda a lista
+    for (int i = 0; i < n - 1; i++) {
+        // Loop para comparar pares de elementos
+        for (int j = 0; j < n - 1 - i; j++) {
+            // Se o elemento atual é maior que o próximo, faz a troca
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];     // Guarda o valor temporário para troca
+                arr[j] = arr[j + 1];   // Coloca o próximo no lugar do atual
+                arr[j + 1] = temp;     // Coloca o temporário no próximo
             }
         }
     }
 }
 
-int main()
-{
-    int arr[] = {64, 342, 25, 991, 12, 661, 22, 11, 90, 1, 6, 44, 192, 813};
-    int n = sizeof(arr)/sizeof(arr[0]);
+int main() {
+    int arr1[] = {};  // Array vazio
+    int n1 = sizeof(arr1) / sizeof(arr1[0]);
 
-    printf("Lista original: ");
-    for (int i = 0; i < n; i++)
-        printf("%d ", arr[i]);
+    printf("Array antes de ordenar (vazio): ");
+    for (int i = 0; i < n1; i++) printf("%d ", arr1[i]);
     printf("\n");
 
-    bubble_sort(arr, n);
+    bubbleSort(arr1, n1);  // Teste com array vazio
 
-    printf("Lista ordenada: ");
-    for (int i = 0; i < n; i++)
-        printf("%d ", arr[i]);
+    printf("Array depois de ordenar (vazio): ");
+    for (int i = 0; i < n1; i++) printf("%d ", arr1[i]);
+    printf("\n");
+
+    // Outro exemplo com array preenchido
+    int arr2[] = {64, 34, 25, 12, 22, 11, 90};
+    int n2 = sizeof(arr2) / sizeof(arr2[0]);
+
+    printf("\nArray antes de ordenar: ");
+    for (int i = 0; i < n2; i++) printf("%d ", arr2[i]);
+    printf("\n");
+
+    bubbleSort(arr2, n2);  // Teste com array preenchido
+
+    printf("Array depois de ordenar: ");
+    for (int i = 0; i < n2; i++) printf("%d ", arr2[i]);
     printf("\n");
 
     return 0;
