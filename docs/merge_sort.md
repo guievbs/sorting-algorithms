@@ -1,8 +1,15 @@
-# Merge Sort
+## Merge Sort
 
 ## 📖 Introdução
 
-O **Merge Sort** é um algoritmo de ordenação eficiente baseado na técnica de **divisão e conquista**. Ele divide a lista original em sublistas, ordena-as recursivamente e, em seguida, combina as sublistas ordenadas. Este algoritmo é amplamente utilizado em aplicações que exigem alta eficiência e estabilidade.
+O **Merge Sort** é um algoritmo de ordenação eficiente que utiliza a técnica de **divisão e conquista**. Criado por **[John von Neumann](https://pt.wikipedia.org/wiki/John_von_Neumann)** em **1945**, este algoritmo se destaca pela sua eficiência e estabilidade, sendo amplamente utilizado em aplicações que exigem alta performance na ordenação de dados.
+
+###### Curiosidade sobre o Neumnn: "As festas em casa de von Neumann eram frequentes, famosas, e longas."
+---
+
+## Motivação do Uso e Desenvolvimento
+
+O Merge Sort foi desenvolvido para resolver problemas de ordenação em grandes volumes de dados, onde a eficiência é crucial. Sua abordagem divide o problema em partes menores, permitindo que cada parte seja resolvida independentemente antes de serem combinadas. Essa característica torna o Merge Sort especialmente útil em ambientes onde a estabilidade da ordenação é necessária, como na ordenação de registros com múltiplos campos.
 
 ---
 
@@ -10,30 +17,33 @@ O **Merge Sort** é um algoritmo de ordenação eficiente baseado na técnica de
 
 ### Passo a Passo
 
-1. **🪓 Divisão**: Divida a lista ao meio até que cada sublista tenha apenas um elemento.
-2. **🤝 Conquista**: Ordene cada sublista recursivamente.
-3. **🔗 Mesclagem (Merge)**: Combine as sublistas ordenadas comparando os elementos e organizando-os em ordem crescente.
+1. **🪓 Divisão**: A lista é dividida ao meio até que cada sublista tenha apenas um elemento.
+   
+2. **🤝 Conquista**: Cada sublista é ordenada recursivamente.
+   
+3. **🔗 Mesclagem (Merge)**: As sublistas ordenadas são combinadas, comparando os elementos e organizando-os em ordem crescente.
 
 **Exemplo de Divisão e Mesclagem:**
 
 Lista original: `[38, 27, 43, 3, 9, 82, 10]`
 
-1. **Divisão**:  
-   `[38, 27, 43]` e `[3, 9, 82, 10]`  
-   `[38]`, `[27, 43]` e `[3, 9]`, `[82, 10]`
-2. **Mesclagem**:  
-   `[27, 38, 43]` e `[3, 9, 10, 82]`  
-   `[3, 9, 10, 27, 38, 43, 82]`
+- **Divisão**:  
+  `[38, 27, 43]` e `[3, 9, 82, 10]`  
+  ``, `[27, 43]` e `[3, 9]`, `[82, 10]`
+
+- **Mesclagem**:  
+  `[27, 38, 43]` e `[3, 9, 10, 82]`  
+  Resultado final: `[3, 9, 10, 27, 38, 43, 82]`
 
 ---
 
 ## 📊 Complexidade
 
-- **Melhor Caso**: `O(n log n)`
-- **Pior Caso**: `O(n log n)`
-- **Caso Médio**: `O(n log n)`
+- **Melhor Caso**: $$O(n \log n)$$
+- **Pior Caso**: $$O(n \log n)$$
+- **Caso Médio**: $$O(n \log n)$$
 
-O Merge Sort requer **espaço adicional** de `O(n)` devido à criação de sublistas para mesclagem.
+O Merge Sort requer **espaço adicional** de $$O(n)$$ devido à criação de sublistas para a mesclagem.
 
 ---
 
@@ -41,39 +51,24 @@ O Merge Sort requer **espaço adicional** de `O(n)` devido à criação de subli
 
 ### Python
 
-A implementação em Python demonstra a simplicidade do algoritmo com recursão:
-
 ```python
 def merge_sort(array):
-    """
-    Implementa o algoritmo Merge Sort para ordenar uma lista.
-    Complexidade de tempo: O(n log n)
-    """
-    # Caso base: se o array tiver tamanho 1 ou 0, já está ordenado
     if len(array) <= 1:
         return array
 
-    # Divide o array ao meio
     meio = len(array) // 2
     esquerda = array[:meio]
     direita = array[meio:]
 
-    # Chamada recursiva para ordenar as duas metades
     esquerda = merge_sort(esquerda)
     direita = merge_sort(direita)
 
-    # Combina as duas metades ordenadas
     return merge(esquerda, direita)
 
-
 def merge(esquerda, direita):
-    """
-    Combina duas listas ordenadas em uma única lista ordenada.
-    """
     resultado = []
     i = j = 0
 
-    # Compara e combina os elementos das duas listas
     while i < len(esquerda) and j < len(direita):
         if esquerda[i] <= direita[j]:
             resultado.append(esquerda[i])
@@ -82,166 +77,73 @@ def merge(esquerda, direita):
             resultado.append(direita[j])
             j += 1
 
-    # Adiciona os elementos restantes da lista esquerda, se houver
     while i < len(esquerda):
         resultado.append(esquerda[i])
         i += 1
 
-    # Adiciona os elementos restantes da lista direita, se houver
     while j < len(direita):
         resultado.append(direita[j])
         j += 1
 
     return resultado
-
-
-# Exemplo de uso
-if __name__ == "__main__":
-    # Lista desordenada para teste
-    lista = [64, 342, 25, 991, 12, 661, 22, 11, 90, 1, 6, 44, 192, 813, 810, 7, 18]
-    print("Lista original:", lista)
-
-    # Aplica o Merge Sort
-    lista_ordenada = merge_sort(lista)
-    print("Lista ordenada:", lista_ordenada)
-
 ```
 
-**Explicação do Código:**
-
-1. O array é dividido em duas metades.
-2. Cada metade é ordenada recursivamente.
-3. As duas metades são mescladas comparando os elementos em ordem crescente.
-
----
-
 ### C
-
-A implementação em C é ideal para entender como o algoritmo funciona em nível mais baixo:
 
 ```c
 #include <stdio.h>
 #include <stdlib.h>
 
-// Protótipos das funções
 void mergeSort(int arr[], int inicio, int fim);
 void merge(int arr[], int inicio, int meio, int fim);
-void imprimirArray(int arr[], int tamanho);
 
-// Função principal do Merge Sort
 void mergeSort(int arr[], int inicio, int fim) {
-    // Verifica se há mais de um elemento para ordenar
     if (inicio < fim) {
-        // Encontra o ponto médio do array
         int meio = inicio + (fim - inicio) / 2;
-        
-        // Chamadas recursivas para ordenar as duas metades
-        mergeSort(arr, inicio, meio);     // Ordena primeira metade
-        mergeSort(arr, meio + 1, fim);    // Ordena segunda metade
-        
-        // Combina as duas metades ordenadas
+        mergeSort(arr, inicio, meio);
+        mergeSort(arr, meio + 1, fim);
         merge(arr, inicio, meio, fim);
     }
 }
 
-// Função para combinar duas partes ordenadas
 void merge(int arr[], int inicio, int meio, int fim) {
-    int i, j, k;
+    int i = inicio;
+    int j = meio + 1;
+    int k = inicio;
     
-    // Calcula o tamanho dos subarrays
-    int tamanho_esquerda = meio - inicio + 1;
-    int tamanho_direita = fim - meio;
+    int *temp = malloc((fim - inicio + 1) * sizeof(int));
     
-    // Cria arrays temporários para armazenar as duas metades
-    int *esquerda = (int*)malloc(tamanho_esquerda * sizeof(int));
-    int *direita = (int*)malloc(tamanho_direita * sizeof(int));
-    
-    // Verifica se a alocação de memória foi bem sucedida
-    if (esquerda == NULL || direita == NULL) {
-        printf("Erro na alocação de memória!\n");
-        return;
-    }
-    
-    // Copia os dados para os arrays temporários
-    for (i = 0; i < tamanho_esquerda; i++)
-        esquerda[i] = arr[inicio + i];
-    for (j = 0; j < tamanho_direita; j++)
-        direita[j] = arr[meio + 1 + j];
-    
-    // Inicializa os índices dos subarrays e do array principal
-    i = 0;      // Índice inicial do primeiro subarray
-    j = 0;      // Índice inicial do segundo subarray
-    k = inicio; // Índice inicial do array mesclado
-    
-    // Mescla os arrays temporários de volta ao array principal
-    while (i < tamanho_esquerda && j < tamanho_direita) {
-        if (esquerda[i] <= direita[j]) {
-            arr[k] = esquerda[i];
-            i++;
+    while (i <= meio && j <= fim) {
+        if (arr[i] <= arr[j]) {
+            temp[k++] = arr[i++];
         } else {
-            arr[k] = direita[j];
-            j++;
+            temp[k++] = arr[j++];
         }
-        k++;
     }
     
-    // Copia os elementos restantes da esquerda, se houver
-    while (i < tamanho_esquerda) {
-        arr[k] = esquerda[i];
-        i++;
-        k++;
+    while (i <= meio) {
+        temp[k++] = arr[i++];
     }
     
-    // Copia os elementos restantes da direita, se houver
-    while (j < tamanho_direita) {
-        arr[k] = direita[j];
-        j++;
-        k++;
+    while (j <= fim) {
+        temp[k++] = arr[j++];
     }
     
-    // Libera a memória alocada
-    free(esquerda);
-    free(direita);
-}
-
-// Função auxiliar para imprimir o array
-void imprimirArray(int arr[], int tamanho) {
-    for (int i = 0; i < tamanho; i++)
-        printf("%d ", arr[i]);
-    printf("\n");
-}
-
-// Função principal para demonstração
-int main() {
-    // Array de exemplo
-    int arr[] = {64, 342, 25, 991, 12, 661, 22, 11, 90, 1, 6, 44, 192, 813, 810, 7, 18};
-    int tamanho = sizeof(arr) / sizeof(arr[0]);
+    for (i = inicio; i <= fim; i++) {
+        arr[i] = temp[i];
+    }
     
-    printf("Array original: ");
-    imprimirArray(arr, tamanho);
-    
-    // Chama o Merge Sort
-    mergeSort(arr, 0, tamanho - 1);
-    
-    printf("Array ordenado: ");
-    imprimirArray(arr, tamanho);
-    
-    return 0;
+    free(temp);
 }
 ```
-
-**Explicação do Código:**
-
-1. O array é dividido usando índices.
-2. A função merge combina subarrays ordenados em um único array.
 
 ---
 
 ## 🛠️ Casos de Uso
 
-- Ordenação em **sistemas críticos** que exigem alta previsibilidade.
-- Ordenação de **grandes volumes de dados** devido à sua eficiência em `O(n log n)`.
-- Ambientes que precisam de um algoritmo **estável**.
+- Ordenação em sistemas críticos que exigem alta previsibilidade.
+- Ordenação de grandes volumes de dados devido à sua eficiência em $$O(n \log n)$$.
+- Ambientes que precisam de um algoritmo estável.
 
 ---
 
@@ -249,7 +151,7 @@ int main() {
 
 ### ✅ Vantagens
 
-- Complexidade consistente: `O(n log n)` em qualquer cenário.
+- Complexidade consistente: $$O(n \log n)$$ em qualquer cenário.
 - Estável: Mantém a ordem relativa de elementos iguais.
 - Excelente para grandes conjuntos de dados.
 
@@ -260,16 +162,108 @@ int main() {
 
 ---
 
-## 🎥 Vídeo Explicativo
+## Curiosidades
 
-![type:video](https://www.youtube.com/embed/a5LfKZp34d8?si=LkG0qozM1DC3OnU9)
-
-[:fontawesome-brands-youtube: Link direto](https://www.youtube.com/watch?v=a5LfKZp34d8&t=1s){ .md-button }
+- O Merge Sort é frequentemente utilizado em linguagens como Lisp devido à sua eficiência na manipulação de listas encadeadas.
+- É o algoritmo base para o TimSort utilizado no Python e Java.
 
 ---
 
-## 📚 Referências
+## Gráfico Comparativo com Outros Algoritmos
 
-- [Wikipedia - Merge Sort](https://en.wikipedia.org/wiki/Merge_sort)
-- **Livro:** _Entendendo Algoritmos_, Aditya Y. Bhargava.
-- **Vídeo:** [CS50x - Lecture 3 - Algorithms](https://youtu.be/jZzyERW7h1A?t=6395)
+| Algoritmo     | Melhor Caso | Pior Caso | Caso Médio |
+|---------------|-------------|-----------|------------|
+| Merge Sort    | $$O(n \log n)$$ | $$O(n \log n)$$ | $$O(n \log n)$$ |
+| Quick Sort    | $$O(n \log n)$$ | $$O(n^2)$$ | $$O(n \log n)$$ |
+| Bubble Sort   | $$O(n)$$       | $$O(n^2)$$ | $$O(n^2)$$ |
+| Insertion Sort| $$O(n)$$       | $$O(n^2)$$ | $$O(n^2)$$ |
+
+---
+
+### Como o Merge Sort se comporta em listas com elementos repetidos
+
+O Merge Sort é um algoritmo de ordenação que se comporta de maneira eficiente e estável, mesmo em listas que contêm elementos repetidos.
+
+- O algoritmo divide a lista em sublistas até que cada sublista contenha apenas um elemento. Isso significa que, se houver elementos repetidos, cada um deles será tratado como uma entidade separada durante a divisão. Durante a fase de mesclagem, os elementos das sublistas são comparados. Se dois elementos iguais forem encontrados (por exemplo, duas instâncias do número 5), o algoritmo os manterá na mesma ordem em que foram encontrados nas sublistas originais. 
+- Isso ocorre porque, ao mesclar, o Merge Sort sempre pega o primeiro elemento disponível de cada sublista. Se ambos os elementos forem iguais, o elemento da sublista à esquerda será escolhido primeiro, preservando sua posição relativa. Após todas as mesclagens, os elementos duplicados aparecerão lado a lado na lista ordenada final. Por exemplo, ao ordenar a lista [4, 2, 5, 5, 1], o resultado será [1, 2, 4, 5, 5], onde os dois 5 permanecem na mesma ordem relativa.
+---
+
+## Importância dos Algoritmos de Ordenação
+
+Os algoritmos de ordenação são fundamentais na ciência da computação porque:
+
+- Facilitam a busca eficiente de dados.
+- Melhoram a performance de outros algoritmos que dependem da ordenação.
+- São essenciais em aplicações práticas como bancos de dados e sistemas operacionais.
+
+---
+
+## Programação Competitiva
+
+A programação competitiva envolve resolver problemas complexos sob restrições de tempo. O conhecimento sobre algoritmos como o Merge Sort é crucial para otimizar soluções e garantir desempenho eficiente.
+
+---
+
+## Quiz Interativo
+
+1. Qual é a complexidade do Merge Sort no pior caso?
+   - A) $$O(n)$$
+   - B) $$O(n \log n)$$
+   - C) $$O(n^2)$$
+
+2. O Merge Sort é um algoritmo:
+   - A) Estável
+   - B) Inestável
+   - C) Ambos
+
+3. Em qual ano John von Neumann desenvolveu o Merge Sort?
+   - A) 1940
+   - B) 1945
+   - C) 1950
+
+---
+
+## Recursos Gráficos na Web
+
+Para visualizar o funcionamento do Merge Sort e comparar com outros algoritmos:
+
+- [Visualgo](https://visualgo.net/en/sorting)
+- [HackerEarth](https://www.hackerearth.com/practice/algorithms/sorting/merge-sort/visualize/)
+
+---
+
+## Dicas para Programar no LeetCode
+
+1. **Entenda bem o problema** antes de começar a codificar.
+2. **Estude soluções existentes** e analise diferentes abordagens.
+3. **Teste seu código com casos extremos** para garantir robustez.
+4. Pratique regularmente para aprimorar suas habilidades em algoritmos.
+
+---
+
+## Apêndice: Começando com Python e C
+
+### Python
+Para começar com Python:
+- Instale Python via [python.org](https://www.python.org).
+- Utilize IDEs como PyCharm ou Jupyter Notebook para desenvolver seus projetos.
+
+### C
+Para começar com C:
+- Instale um compilador como GCC ou use IDEs como Code::Blocks ou Dev-C++.
+- Familiarize-se com conceitos básicos como ponteiros e alocação dinâmica.
+
+---
+
+Esses detalhes adicionais enriquecem a documentação do Merge Sort e ajudam a compreender melhor sua importância na ciência da computação.
+
+Citations:
+- [1] https://en.wikipedia.org/wiki/Merge_Sort
+- [2] https://stackoverflow.com/questions/73733319/comparison-using-merge-sort
+- [3] https://visualgo.net/en/sorting
+- [4] https://www.geeksforgeeks.org/merge-sort/
+- [5] https://www.codementor.io/@satycool16/a-step-by-step-guide-to-mastering-leetcode-problems-2dp8hqogsg
+- [6] https://developer.nvidia.com/blog/merge-sort-explained-a-data-scientists-algorithm-guide/
+- [7] https://github.com/tusharmakkar08/Sorting_Graphs
+- [8] https://www.geeksforgeeks.org/time-and-space-complexity-analysis-of-merge-sort/
+- [9] https://hsm.stackexchange.com/questions/12549/how-did-von-neumann-come-up-with-his-merge-sort-algorithm
