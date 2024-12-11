@@ -1,0 +1,1338 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://guievbs.github.io/sorting-algorithms/merge_sort/">
+      
+      
+        <link rel="prev" href="../insertion_sort/">
+      
+      
+        <link rel="next" href="../quick_sort/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.47">
+    
+    
+      
+        <title>Merge sort - Algoritmos de Ordenação</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#merge-sort" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href=".." title="Algoritmos de Ordenação" class="md-header__button md-logo" aria-label="Algoritmos de Ordenação" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Algoritmos de Ordenação
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Merge sort
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="indigo"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo"  aria-label="Modo noturno"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo noturno" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartilhar" aria-label="Compartilhar" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/guievbs/sorting-algorithms" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sorting-algorithms
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Algoritmos de Ordenação" class="md-nav__button md-logo" aria-label="Algoritmos de Ordenação" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Algoritmos de Ordenação
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/guievbs/sorting-algorithms" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sorting-algorithms
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apresentação do Projeto
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bubble_sort/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bubble Sort
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../counting_sort/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Counting Sort
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../heap_sort/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Heap Sort
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../insertion_sort/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Insertion Sort
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Merge sort
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Merge sort
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#merge-sort" class="md-nav__link">
+    <span class="md-ellipsis">
+      Merge Sort
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introducao" class="md-nav__link">
+    <span class="md-ellipsis">
+      📖 Introdução
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📖 Introdução">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#curiosidade-sobre-o-neumnn-as-festas-em-casa-de-von-neumann-eram-frequentes-famosas-e-longas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Curiosidade sobre o Neumnn: "As festas em casa de von Neumann eram frequentes, famosas, e longas."
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivacao-do-uso-e-desenvolvimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motivação do Uso e Desenvolvimento
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcionamento-do-algoritmo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funcionamento do Algoritmo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funcionamento do Algoritmo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#passo-a-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Passo a Passo
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complexidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Complexidade
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      💻 Implementação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💻 Implementação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      C
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛠️ Casos de Uso
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vantagens-e-desvantagens" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚖️ Vantagens e Desvantagens
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚖️ Vantagens e Desvantagens">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantagens" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Vantagens
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desvantagens" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ Desvantagens
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#curiosidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      Curiosidades
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grafico-comparativo-com-outros-algoritmos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gráfico Comparativo com Outros Algoritmos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gráfico Comparativo com Outros Algoritmos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#como-o-merge-sort-se-comporta-em-listas-com-elementos-repetidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Como o Merge Sort se comporta em listas com elementos repetidos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#importancia-dos-algoritmos-de-ordenacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importância dos Algoritmos de Ordenação
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#programacao-competitiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      Programação Competitiva
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quiz-interativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quiz Interativo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recursos-graficos-na-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recursos Gráficos na Web
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dicas-para-programar-no-leetcode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dicas para Programar no LeetCode
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apendice-comecando-com-python-e-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apêndice: Começando com Python e C
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Apêndice: Começando com Python e C">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      C
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quick_sort/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quick Sort
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#merge-sort" class="md-nav__link">
+    <span class="md-ellipsis">
+      Merge Sort
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introducao" class="md-nav__link">
+    <span class="md-ellipsis">
+      📖 Introdução
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📖 Introdução">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#curiosidade-sobre-o-neumnn-as-festas-em-casa-de-von-neumann-eram-frequentes-famosas-e-longas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Curiosidade sobre o Neumnn: "As festas em casa de von Neumann eram frequentes, famosas, e longas."
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivacao-do-uso-e-desenvolvimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motivação do Uso e Desenvolvimento
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcionamento-do-algoritmo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funcionamento do Algoritmo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funcionamento do Algoritmo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#passo-a-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Passo a Passo
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complexidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Complexidade
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      💻 Implementação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💻 Implementação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      C
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛠️ Casos de Uso
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vantagens-e-desvantagens" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚖️ Vantagens e Desvantagens
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚖️ Vantagens e Desvantagens">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantagens" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Vantagens
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desvantagens" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ Desvantagens
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#curiosidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      Curiosidades
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grafico-comparativo-com-outros-algoritmos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gráfico Comparativo com Outros Algoritmos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gráfico Comparativo com Outros Algoritmos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#como-o-merge-sort-se-comporta-em-listas-com-elementos-repetidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Como o Merge Sort se comporta em listas com elementos repetidos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#importancia-dos-algoritmos-de-ordenacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importância dos Algoritmos de Ordenação
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#programacao-competitiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      Programação Competitiva
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quiz-interativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quiz Interativo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recursos-graficos-na-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recursos Gráficos na Web
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dicas-para-programar-no-leetcode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dicas para Programar no LeetCode
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apendice-comecando-com-python-e-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apêndice: Começando com Python e C
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Apêndice: Começando com Python e C">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      C
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>Merge sort</h1>
+
+<div><h2 id="merge-sort">Merge Sort</h2>
+<h2 id="introducao">📖 Introdução</h2>
+<p>O <strong>Merge Sort</strong> é um algoritmo de ordenação eficiente que utiliza a técnica de <strong>divisão e conquista</strong>. Criado por <strong><a href="https://pt.wikipedia.org/wiki/John_von_Neumann">John von Neumann</a></strong> em <strong>1945</strong>, este algoritmo se destaca pela sua eficiência e estabilidade, sendo amplamente utilizado em aplicações que exigem alta performance na ordenação de dados.</p>
+<h6 id="curiosidade-sobre-o-neumnn-as-festas-em-casa-de-von-neumann-eram-frequentes-famosas-e-longas">Curiosidade sobre o Neumnn: "As festas em casa de von Neumann eram frequentes, famosas, e longas."</h6>
+<hr>
+<h2 id="motivacao-do-uso-e-desenvolvimento">Motivação do Uso e Desenvolvimento</h2>
+<p>O Merge Sort foi desenvolvido para resolver problemas de ordenação em grandes volumes de dados, onde a eficiência é crucial. Sua abordagem divide o problema em partes menores, permitindo que cada parte seja resolvida independentemente antes de serem combinadas. Essa característica torna o Merge Sort especialmente útil em ambientes onde a estabilidade da ordenação é necessária, como na ordenação de registros com múltiplos campos.</p>
+<hr>
+<h2 id="funcionamento-do-algoritmo">Funcionamento do Algoritmo</h2>
+<h3 id="passo-a-passo">Passo a Passo</h3>
+<ol>
+<li>
+<p><strong>🪓 Divisão</strong>: A lista é dividida ao meio até que cada sublista tenha apenas um elemento.</p>
+</li>
+<li>
+<p><strong>🤝 Conquista</strong>: Cada sublista é ordenada recursivamente.</p>
+</li>
+<li>
+<p><strong>🔗 Mesclagem (Merge)</strong>: As sublistas ordenadas são combinadas, comparando os elementos e organizando-os em ordem crescente.</p>
+</li>
+</ol>
+<p><strong>Exemplo de Divisão e Mesclagem:</strong></p>
+<p>Lista original: <code>[38, 27, 43, 3, 9, 82, 10]</code></p>
+<ul>
+<li>
+<p><strong>Divisão</strong>:<br>
+<code>[38, 27, 43]</code> e <code>[3, 9, 82, 10]</code><br>
+<code>`,</code>[27, 43]<code>e</code>[3, 9]<code>,</code>[82, 10]`</p>
+</li>
+<li>
+<p><strong>Mesclagem</strong>:<br>
+<code>[27, 38, 43]</code> e <code>[3, 9, 10, 82]</code><br>
+  Resultado final: <code>[3, 9, 10, 27, 38, 43, 82]</code></p>
+</li>
+</ul>
+<hr>
+<h2 id="complexidade">📊 Complexidade</h2>
+<ul>
+<li><strong>Melhor Caso</strong>: $$O(n \log n)$$</li>
+<li><strong>Pior Caso</strong>: $$O(n \log n)$$</li>
+<li><strong>Caso Médio</strong>: $$O(n \log n)$$</li>
+</ul>
+<p>O Merge Sort requer <strong>espaço adicional</strong> de $$O(n)$$ devido à criação de sublistas para a mesclagem.</p>
+<hr>
+<h2 id="implementacao">💻 Implementação</h2>
+<h3 id="python">Python</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">merge_sort</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="k">return</span> <span class="n">array</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">meio</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">esquerda</span> <span class="o">=</span> <span class="n">array</span><span class="p">[:</span><span class="n">meio</span><span class="p">]</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">direita</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">meio</span><span class="p">:]</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">esquerda</span> <span class="o">=</span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">esquerda</span><span class="p">)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">direita</span> <span class="o">=</span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">direita</span><span class="p">)</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="n">esquerda</span><span class="p">,</span> <span class="n">direita</span><span class="p">)</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="n">esquerda</span><span class="p">,</span> <span class="n">direita</span><span class="p">):</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">i</span> <span class="o">=</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">esquerda</span><span class="p">)</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">direita</span><span class="p">):</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="k">if</span> <span class="n">esquerda</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">direita</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>            <span class="n">resultado</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">esquerda</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>            <span class="n">resultado</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">direita</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">esquerda</span><span class="p">):</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        <span class="n">resultado</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">esquerda</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">direita</span><span class="p">):</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>        <span class="n">resultado</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">direita</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>        <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>    <span class="k">return</span> <span class="n">resultado</span>
+</span></code></pre></div>
+<h3 id="c">C</h3>
+<div class="language-c highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">mergeSort</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">arr</span><span class="p">[],</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">inicio</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">fim</span><span class="p">);</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="kt">void</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">arr</span><span class="p">[],</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">inicio</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">meio</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">fim</span><span class="p">);</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="kt">void</span><span class="w"> </span><span class="nf">mergeSort</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">arr</span><span class="p">[],</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">inicio</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">fim</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inicio</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">fim</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">meio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inicio</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">fim</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">inicio</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="n">mergeSort</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="w"> </span><span class="n">inicio</span><span class="p">,</span><span class="w"> </span><span class="n">meio</span><span class="p">);</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">        </span><span class="n">mergeSort</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="w"> </span><span class="n">meio</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">fim</span><span class="p">);</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">        </span><span class="n">merge</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="w"> </span><span class="n">inicio</span><span class="p">,</span><span class="w"> </span><span class="n">meio</span><span class="p">,</span><span class="w"> </span><span class="n">fim</span><span class="p">);</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="p">}</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="kt">void</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">arr</span><span class="p">[],</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">inicio</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">meio</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">fim</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inicio</span><span class="p">;</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meio</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inicio</span><span class="p">;</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">((</span><span class="n">fim</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">inicio</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">meio</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">fim</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">            </span><span class="n">temp</span><span class="p">[</span><span class="n">k</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">];</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">            </span><span class="n">temp</span><span class="p">[</span><span class="n">k</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">++</span><span class="p">];</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">meio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="w">        </span><span class="n">temp</span><span class="p">[</span><span class="n">k</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">];</span>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">fim</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="w">        </span><span class="n">temp</span><span class="p">[</span><span class="n">k</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">++</span><span class="p">];</span>
+</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>
+</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inicio</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">fim</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="w">        </span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>
+</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
+</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="p">}</span>
+</span></code></pre></div>
+<hr>
+<h2 id="casos-de-uso">🛠️ Casos de Uso</h2>
+<ul>
+<li>Ordenação em sistemas críticos que exigem alta previsibilidade.</li>
+<li>Ordenação de grandes volumes de dados devido à sua eficiência em $$O(n \log n)$$.</li>
+<li>Ambientes que precisam de um algoritmo estável.</li>
+</ul>
+<hr>
+<h2 id="vantagens-e-desvantagens">⚖️ Vantagens e Desvantagens</h2>
+<h3 id="vantagens">✅ Vantagens</h3>
+<ul>
+<li>Complexidade consistente: $$O(n \log n)$$ em qualquer cenário.</li>
+<li>Estável: Mantém a ordem relativa de elementos iguais.</li>
+<li>Excelente para grandes conjuntos de dados.</li>
+</ul>
+<h3 id="desvantagens">❌ Desvantagens</h3>
+<ul>
+<li>Consome mais memória devido à criação de sublistas.</li>
+<li>Menos eficiente para listas pequenas.</li>
+</ul>
+<hr>
+<h2 id="curiosidades">Curiosidades</h2>
+<ul>
+<li>O Merge Sort é frequentemente utilizado em linguagens como Lisp devido à sua eficiência na manipulação de listas encadeadas.</li>
+<li>É o algoritmo base para o TimSort utilizado no Python e Java.</li>
+</ul>
+<hr>
+<h2 id="grafico-comparativo-com-outros-algoritmos">Gráfico Comparativo com Outros Algoritmos</h2>
+<table>
+<thead>
+<tr>
+<th>Algoritmo</th>
+<th>Melhor Caso</th>
+<th>Pior Caso</th>
+<th>Caso Médio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Merge Sort</td>
+<td>$$O(n \log n)$$</td>
+<td>$$O(n \log n)$$</td>
+<td>$$O(n \log n)$$</td>
+</tr>
+<tr>
+<td>Quick Sort</td>
+<td>$$O(n \log n)$$</td>
+<td>$$O(n^2)$$</td>
+<td>$$O(n \log n)$$</td>
+</tr>
+<tr>
+<td>Bubble Sort</td>
+<td>$$O(n)$$</td>
+<td>$$O(n^2)$$</td>
+<td>$$O(n^2)$$</td>
+</tr>
+<tr>
+<td>Insertion Sort</td>
+<td>$$O(n)$$</td>
+<td>$$O(n^2)$$</td>
+<td>$$O(n^2)$$</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="como-o-merge-sort-se-comporta-em-listas-com-elementos-repetidos">Como o Merge Sort se comporta em listas com elementos repetidos</h3>
+<p>O Merge Sort é um algoritmo de ordenação que se comporta de maneira eficiente e estável, mesmo em listas que contêm elementos repetidos.</p>
+<ul>
+<li>O algoritmo divide a lista em sublistas até que cada sublista contenha apenas um elemento. Isso significa que, se houver elementos repetidos, cada um deles será tratado como uma entidade separada durante a divisão. Durante a fase de mesclagem, os elementos das sublistas são comparados. Se dois elementos iguais forem encontrados (por exemplo, duas instâncias do número 5), o algoritmo os manterá na mesma ordem em que foram encontrados nas sublistas originais. </li>
+<li>Isso ocorre porque, ao mesclar, o Merge Sort sempre pega o primeiro elemento disponível de cada sublista. Se ambos os elementos forem iguais, o elemento da sublista à esquerda será escolhido primeiro, preservando sua posição relativa. Após todas as mesclagens, os elementos duplicados aparecerão lado a lado na lista ordenada final. Por exemplo, ao ordenar a lista [4, 2, 5, 5, 1], o resultado será [1, 2, 4, 5, 5], onde os dois 5 permanecem na mesma ordem relativa.</li>
+</ul>
+<hr>
+<h2 id="importancia-dos-algoritmos-de-ordenacao">Importância dos Algoritmos de Ordenação</h2>
+<p>Os algoritmos de ordenação são fundamentais na ciência da computação porque:</p>
+<ul>
+<li>Facilitam a busca eficiente de dados.</li>
+<li>Melhoram a performance de outros algoritmos que dependem da ordenação.</li>
+<li>São essenciais em aplicações práticas como bancos de dados e sistemas operacionais.</li>
+</ul>
+<hr>
+<h2 id="programacao-competitiva">Programação Competitiva</h2>
+<p>A programação competitiva envolve resolver problemas complexos sob restrições de tempo. O conhecimento sobre algoritmos como o Merge Sort é crucial para otimizar soluções e garantir desempenho eficiente.</p>
+<hr>
+<h2 id="quiz-interativo">Quiz Interativo</h2>
+<ol>
+<li>Qual é a complexidade do Merge Sort no pior caso?</li>
+<li>A) $$O(n)$$</li>
+<li>B) $$O(n \log n)$$</li>
+<li>
+<p>C) $$O(n^2)$$</p>
+</li>
+<li>
+<p>O Merge Sort é um algoritmo:</p>
+</li>
+<li>A) Estável</li>
+<li>B) Inestável</li>
+<li>
+<p>C) Ambos</p>
+</li>
+<li>
+<p>Em qual ano John von Neumann desenvolveu o Merge Sort?</p>
+</li>
+<li>A) 1940</li>
+<li>B) 1945</li>
+<li>C) 1950</li>
+</ol>
+<hr>
+<h2 id="recursos-graficos-na-web">Recursos Gráficos na Web</h2>
+<p>Para visualizar o funcionamento do Merge Sort e comparar com outros algoritmos:</p>
+<ul>
+<li><a href="https://visualgo.net/en/sorting">Visualgo</a></li>
+<li><a href="https://www.hackerearth.com/practice/algorithms/sorting/merge-sort/visualize/">HackerEarth</a></li>
+</ul>
+<hr>
+<h2 id="dicas-para-programar-no-leetcode">Dicas para Programar no LeetCode</h2>
+<ol>
+<li><strong>Entenda bem o problema</strong> antes de começar a codificar.</li>
+<li><strong>Estude soluções existentes</strong> e analise diferentes abordagens.</li>
+<li><strong>Teste seu código com casos extremos</strong> para garantir robustez.</li>
+<li>Pratique regularmente para aprimorar suas habilidades em algoritmos.</li>
+</ol>
+<hr>
+<h2 id="apendice-comecando-com-python-e-c">Apêndice: Começando com Python e C</h2>
+<h3 id="python_1">Python</h3>
+<p>Para começar com Python:
+- Instale Python via <a href="https://www.python.org">python.org</a>.
+- Utilize IDEs como PyCharm ou Jupyter Notebook para desenvolver seus projetos.</p>
+<h3 id="c_1">C</h3>
+<p>Para começar com C:
+- Instale um compilador como GCC ou use IDEs como Code::Blocks ou Dev-C++.
+- Familiarize-se com conceitos básicos como ponteiros e alocação dinâmica.</p>
+<hr>
+<p>Esses detalhes adicionais enriquecem a documentação do Merge Sort e ajudam a compreender melhor sua importância na ciência da computação.</p>
+<p>Citations:
+- [1] https://en.wikipedia.org/wiki/Merge_Sort
+- [2] https://stackoverflow.com/questions/73733319/comparison-using-merge-sort
+- [3] https://visualgo.net/en/sorting
+- [4] https://www.geeksforgeeks.org/merge-sort/
+- [5] https://www.codementor.io/@satycool16/a-step-by-step-guide-to-mastering-leetcode-problems-2dp8hqogsg
+- [6] https://developer.nvidia.com/blog/merge-sort-explained-a-data-scientists-algorithm-guide/
+- [7] https://github.com/tusharmakkar08/Sorting_Graphs
+- [8] https://www.geeksforgeeks.org/time-and-space-complexity-analysis-of-merge-sort/
+- [9] https://hsm.stackexchange.com/questions/12549/how-did-von-neumann-come-up-with-his-merge-sort-algorithm</p></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/guievbs" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "content.code.copy", "content.tabs.link", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
