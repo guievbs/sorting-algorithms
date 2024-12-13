@@ -36,9 +36,9 @@ Lista original: `[10, 7, 8, 9, 1, 5]`
 
 ## 📊 Complexidade
 
-- **Melhor Caso**: $$O(n \log n)$$ – quando o pivô divide a lista em metades iguais.
-- **Pior Caso**: $$O(n^2)$$ – ocorre quando o pivô é sempre o maior ou menor elemento.
-- **Caso Médio**: $$O(n \log n)$$ – comportamento mais comum.
+- **Melhor Caso**: O(n \log n) – quando o pivô divide a lista em metades iguais.
+- **Pior Caso**: O(n²) – ocorre quando o pivô é sempre o maior ou menor elemento.
+- **Caso Médio**: O(n \log n) – comportamento mais comum.
 
 O Quick Sort exige **memória adicional mínima**, pois realiza a ordenação no local (**in-place sorting**).
 
@@ -108,8 +108,7 @@ int partition(int arr[], int low, int high) {
 
 ---
 
-> [!NOTE]
-> Vantagens e Desvantagens
+## ⚖️ Vantagens e Desvantagens
 
 - Altamente eficiente em grandes conjuntos de dados.
 - Requer pouca memória adicional.
@@ -140,8 +139,7 @@ int partition(int arr[], int low, int high) {
 
 ---
 
-> [!IMPORTANT]  
-> Elementos Repetidos no Quick Sort
+## Elementos Repetidos no Merge sort
 
 Em listas com elementos repetidos, o Quick Sort pode alterar a ordem relativa desses elementos, já que não é estável. Contudo, ele agrupa todas as ocorrências do mesmo valor de forma eficiente.
 
@@ -166,25 +164,13 @@ No contexto da programação competitiva, o Quick Sort é amplamente utilizado p
 
 ---
 
-> [!TIP]
-> Quiz Interativo
+## Quiz Interativo
 
 1. Qual é a complexidade do Quick Sort no melhor caso?
 
-   - A) O(n)
-   - B) O(n \log n)
-   - C) O(n²)
-
 2. O Quick Sort é um algoritmo:
 
-   - A) Estável
-   - B) Inestável
-   - C) Ambos
-
 3. Em qual ano foi desenvolvido o Quick Sort?
-   - A) 1955
-   - B) 1960
-   - C) 1970
 
 ---
 
@@ -217,3 +203,6 @@ Citação:
 - [Wikipedia - Quick Sort](https://en.wikipedia.org/wiki/Quicksort)
 - **Livro**: _Entendendo Algoritmos_, Aditya Y. Bhargava.
 - **Vídeo**: [Quicksort: Implementação e Explicação](https://www.youtube.com/watch?v=nV_WE8SEuGE)
+- [DEV Community](https://dev.to/dormin/ordenacao-rapida-quick-sort-171f)
+- [Blog Cyberini](https://www.blogcyberini.com/2018/08/quicksort-analise-e-implementacoes.html)
+- [Khan Academy](https://pt.khanacademy.org/computing/computer-science/algorithms/quick-sort/a/overview-of-quicksort) -

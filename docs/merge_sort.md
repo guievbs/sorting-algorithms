@@ -44,7 +44,7 @@ s
 - **Pior Caso**: O(n \log n)
 - **Caso Médio**: O(n \log n)
 
-O Merge Sort requer **espaço adicional** de $$O(n)$$ devido à criação de sublistas para a mesclagem.
+O Merge Sort requer **espaço adicional** de _O(n)_ devido à criação de sublistas para a mesclagem.
 
 ---
 
@@ -143,17 +143,16 @@ void merge(int arr[], int inicio, int meio, int fim) {
 ## 🛠️ Casos de Uso
 
 - Ordenação em sistemas críticos que exigem alta previsibilidade.
-- Ordenação de grandes volumes de dados devido à sua eficiência em $$O(n \log n)$$.
+- Ordenação de grandes volumes de dados devido à sua eficiência em _O(n \log n)_.
 - Ambientes que precisam de um algoritmo estável.
 
 ---
 
-> [!NOTE]
-> Vantagens e Desvantagens
+## ⚖️ Vantagens e Desvantagens
 
 ### ✅ Vantagens
 
-- Complexidade consistente: $$O(n \log n)$$ em qualquer cenário.
+- Complexidade consistente: _O(n \log n)_ em qualquer cenário.
 - Estável: Mantém a ordem relativa de elementos iguais.
 - Excelente para grandes conjuntos de dados.
 
@@ -182,8 +181,7 @@ void merge(int arr[], int inicio, int meio, int fim) {
 
 ---
 
-> [!IMPORTANT]  
-> Elementos Repetidos no Merge sort
+## Elementos Repetidos no Merge sort
 
 O Merge Sort é um algoritmo de ordenação que se comporta de maneira eficiente e estável, mesmo em listas que contêm elementos repetidos.
 
@@ -208,23 +206,13 @@ A programação competitiva envolve resolver problemas complexos sob restriçõe
 
 ---
 
-> [!TIP]
-> Quiz Interativo
+## Quiz Interativo
 
 1. Qual é a complexidade do Merge Sort no pior caso?
-   A) O(n)
-   B) O(n \log n)
-   C) O(n²)
 
 2. O Merge Sort é um algoritmo:
-   A) Estável
-   B) Inestável
-   C) Ambos
 
 3. Em qual ano John von Neumann desenvolveu o Merge Sort?
-   A) 1940
-   B) 1945
-   C) 1950
 
 ---
 
@@ -251,6 +239,8 @@ Para visualizar o funcionamento do Merge Sort e comparar com outros algoritmos:
 ![type:video](https://www.youtube.com/embed/nV_WE8SEuGE?si=mmKkww2e7E-QSfPS)
 
 ---
+
+## Referências
 
 Esses detalhes adicionais enriquecem a documentação do Merge Sort e ajudam a compreender melhor sua importância na ciência da computação.
 
