@@ -1,4 +1,4 @@
-## Apêndice
+# Apêndice
 
 ### Começando com Python e C
 

@@ -68,7 +68,7 @@ def bubble_sort(arr):
     if not arr: # Verifica se a lista está vazia
         print("A lista está vazia e não há nada para ordenar.")
         return None
-    
+
     n = len(arr) # Tamanho da lista
 
     # Loop principal que percorre toda a lista
@@ -195,8 +195,6 @@ O **Bubble Sort** é geralmente usado em:
 ## 🎥 Vídeo Explicativo
 
 ![type:video](https://www.youtube.com/embed/8RkZoBZNNgI?si=lbZPfh023MqmhpQF)
-
-[:fontawesome-brands-youtube: Link direto](https://www.youtube.com/watch?v=8RkZoBZNNgI){ .md-button }
 
 ---
 

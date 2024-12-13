@@ -65,8 +65,8 @@ Toda a documentação e os códigos estarão organizados e disponíveis no [GitH
 
 - **Linguagens:** Python e C.
 - **Controle de Versão e Publicação:** GitHub e GitHub Pages.
-- **Gestão de Tarefas:** Kanban no GitHub Projects.
-- **Recursos Audiovisuais:** Vídeos integrados na plataforma, hospedados no YouTube.
+- **Gestão de Tarefas:** Trello
+- **Recursos Audiovisuais:** Vídeos integrados na plataforma.
 
 ---
 
