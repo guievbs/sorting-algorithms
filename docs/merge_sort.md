@@ -246,12 +246,12 @@ Esses detalhes adicionais enriquecem a documentação do Merge Sort e ajudam a c
 
 Citação:
 
-- [Wikipedia](https://en.wikipedia.org/wiki/Merge_Sort)
-- [Stackoverflow](https://stackoverflow.com/questions/73733319/comparison-using-merge-sort)
-- [Visualgo](https://visualgo.net/en/sorting)
-- [Geeks For Geeks](https://www.geeksforgeeks.org/merge-sort/)
-- [Geeks For Geeks](https://www.geeksforgeeks.org/time-and-space-complexity-analysis-of-merge-sort/)
-- [Code Mentor](https://www.codementor.io/@satycool16/a-step-by-step-guide-to-mastering-leetcode-problems-2dp8hqogsg)
-- [Developer Nvidia](https://developer.nvidia.com/blog/merge-sort-explained-a-data-scientists-algorithm-guide/)
-- [Github](https://github.com/tusharmakkar08/Sorting_Graphs)
-- [HSM - Stack Exchange](https://hsm.stackexchange.com/questions/12549/how-did-von-neumann-come-up-with-his-merge-sort-algorithm)
+1. [Wikipedia](https://en.wikipedia.org/wiki/Merge_Sort)
+2. [Stackoverflow](https://stackoverflow.com/questions/73733319/comparison-using-merge-sort)
+3. [Visualgo](https://visualgo.net/en/sorting)
+4. [Geeks For Geeks](https://www.geeksforgeeks.org/merge-sort/)
+5. [Geeks For Geeks](https://www.geeksforgeeks.org/time-and-space-complexity-analysis-of-merge-sort/)
+6. [Code Mentor](https://www.codementor.io/@satycool16/a-step-by-step-guide-to-mastering-leetcode-problems-2dp8hqogsg)
+7. [Developer Nvidia](https://developer.nvidia.com/blog/merge-sort-explained-a-data-scientists-algorithm-guide/)
+8. [Github](https://github.com/tusharmakkar08/Sorting_Graphs)
+9. [HSM - Stack Exchange](https://hsm.stackexchange.com/questions/12549/how-did-von-neumann-come-up-with-his-merge-sort-algorithm)

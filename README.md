@@ -1,6 +1,6 @@
 ## **Página Web sobre Algoritmos de Ordenação**
 
-![](/images/ordenacao.png)
+![](docs\images\ordenacao.png)
 
 ### **Índice**
 

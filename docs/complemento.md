@@ -1,15 +1,15 @@
-# Apêndice
+# Complemento
 
-### Começando com Python e C
+## Começando com Python e C
 
-#### Python
+### Python
 
 Para começar com Python:
 
 - Instale Python via [python.org](https://www.python.org).
 - Utilize IDEs como PyCharm ou Jupyter Notebook para desenvolver seus projetos.
 
-#### C
+### C
 
 Para começar com C:
 

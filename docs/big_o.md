@@ -15,16 +15,6 @@ Por exemplo:
 
 Essas classificações são cruciais para comparar a eficiência de diferentes algoritmos e escolher a melhor solução para um problema específico.
 
-## Definição Formal
-
-Formalmente, dizemos que uma função \( f(n) \) é \( O(g(n)) \) se existem constantes \( c > 0 \) e \( n_0 \geq 0 \) tais que:
-
-\[
-f(n) \leq c \cdot g(n) \quad \text{para todo } n \geq n_0
-\]
-
-Isso significa que, a partir de um certo ponto _n_, _f(n)_ não cresce mais rápido do que um múltiplo constante de _g(n)_.
-
 ## Exemplos Comuns de Notação Big(O)
 
 Aqui estão algumas das notações Big O mais comuns e suas interpretações:

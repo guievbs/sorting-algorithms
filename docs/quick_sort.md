@@ -196,13 +196,15 @@ No contexto da programação competitiva, o Quick Sort é amplamente utilizado p
 
 ---
 
-Esses detalhes adicionais enriquecem a documentação do Merge Sort e ajudam a compreender melhor sua importância na ciência da computação.
+## Referências
+
+Esses detalhes adicionais enriquecem a documentação do Quick Sort e ajudam a compreender melhor sua importância na ciência da computação.
 
 Citação:
 
-- [Wikipedia - Quick Sort](https://en.wikipedia.org/wiki/Quicksort)
-- **Livro**: _Entendendo Algoritmos_, Aditya Y. Bhargava.
-- **Vídeo**: [Quicksort: Implementação e Explicação](https://www.youtube.com/watch?v=nV_WE8SEuGE)
-- [DEV Community](https://dev.to/dormin/ordenacao-rapida-quick-sort-171f)
-- [Blog Cyberini](https://www.blogcyberini.com/2018/08/quicksort-analise-e-implementacoes.html)
-- [Khan Academy](https://pt.khanacademy.org/computing/computer-science/algorithms/quick-sort/a/overview-of-quicksort) -
+1. [Wikipedia - Quick Sort](https://en.wikipedia.org/wiki/Quicksort)
+2. **Livro**: _Entendendo Algoritmos_, Aditya Y. Bhargava.
+3. **Vídeo**: [Quicksort: Implementação e Explicação](https://www.youtube.com/watch?v=nV_WE8SEuGE)
+4. [DEV Community](https://dev.to/dormin/ordenacao-rapida-quick-sort-171f)
+5. [Blog Cyberini](https://www.blogcyberini.com/2018/08/quicksort-analise-e-implementacoes.html)
+6. [Khan Academy](https://pt.khanacademy.org/computing/computer-science/algorithms/quick-sort/a/overview-of-quicksort) -
