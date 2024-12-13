@@ -173,10 +173,10 @@ void merge(int arr[], int inicio, int meio, int fim) {
 
 | Algoritmo     | Melhor Caso | Pior Caso | Caso Médio |
 |---------------|-------------|-----------|------------|
-| Merge Sort    | $$O(n \log n)$$ | $$O(n \log n)$$ | $$O(n \log n)$$ |
-| Quick Sort    | $$O(n \log n)$$ | $$O(n^2)$$ | $$O(n \log n)$$ |
-| Bubble Sort   | $$O(n)$$       | $$O(n^2)$$ | $$O(n^2)$$ |
-| Insertion Sort| $$O(n)$$       | $$O(n^2)$$ | $$O(n^2)$$ |
+| Merge Sort    | O(n \log n) | (n \log n) | (n \log n) |
+| Quick Sort    | O(n \log n) | O(n²) | O(n \log n) |
+| Bubble Sort   | O(n)       | O(n²) | O(n²) |
+| Insertion Sort| O(n)       | O(n²) | O(n²) |
 
 ---
 
@@ -207,9 +207,9 @@ A programação competitiva envolve resolver problemas complexos sob restriçõe
 ## Quiz Interativo
 
 1. Qual é a complexidade do Merge Sort no pior caso?
-   - A) $$O(n)$$
-   - B) $$O(n \log n)$$
-   - C) $$O(n^2)$$
+   - A) O(n)
+   - B) O(n \log n)
+   - C) O(n²)
 
 2. O Merge Sort é um algoritmo:
    - A) Estável
@@ -257,13 +257,13 @@ Para começar com C:
 
 Esses detalhes adicionais enriquecem a documentação do Merge Sort e ajudam a compreender melhor sua importância na ciência da computação.
 
-Citations:
-- [1] https://en.wikipedia.org/wiki/Merge_Sort
-- [2] https://stackoverflow.com/questions/73733319/comparison-using-merge-sort
-- [3] https://visualgo.net/en/sorting
-- [4] https://www.geeksforgeeks.org/merge-sort/
-- [5] https://www.codementor.io/@satycool16/a-step-by-step-guide-to-mastering-leetcode-problems-2dp8hqogsg
-- [6] https://developer.nvidia.com/blog/merge-sort-explained-a-data-scientists-algorithm-guide/
-- [7] https://github.com/tusharmakkar08/Sorting_Graphs
-- [8] https://www.geeksforgeeks.org/time-and-space-complexity-analysis-of-merge-sort/
-- [9] https://hsm.stackexchange.com/questions/12549/how-did-von-neumann-come-up-with-his-merge-sort-algorithm
+Citação:
+- [Wikipedia](https://en.wikipedia.org/wiki/Merge_Sort)
+- [Stackoverflow](https://stackoverflow.com/questions/73733319/comparison-using-merge-sort)
+- [Visualgo](https://visualgo.net/en/sorting)
+- [Geeks For Geeks](https://www.geeksforgeeks.org/merge-sort/)
+- [Geeks For Geeks](https://www.geeksforgeeks.org/time-and-space-complexity-analysis-of-merge-sort/)
+- [Code Mentor](https://www.codementor.io/@satycool16/a-step-by-step-guide-to-mastering-leetcode-problems-2dp8hqogsg)
+- [Developer Nvidia](https://developer.nvidia.com/blog/merge-sort-explained-a-data-scientists-algorithm-guide/)
+- [Github](https://github.com/tusharmakkar08/Sorting_Graphs)
+- [HSM - Stack Exchange](https://hsm.stackexchange.com/questions/12549/how-did-von-neumann-come-up-with-his-merge-sort-algorithm)
