@@ -1,8 +1,18 @@
 # Quick Sort
 
-## Introdução
+## 🕯️ Introdução
 
-O **Quick Sort** é um algoritmo de ordenação eficiente baseado na técnica de **divisão e conquista**. Ele divide a lista em duas partes, usando um **pivô** para ordenar os elementos em relação a ele. Esse processo é repetido recursivamente nas sublistas, resultando em uma ordenação eficiente. O Quick Sort é amplamente utilizado devido à sua rapidez em médias e grandes listas de dados.
+O **Quick Sort** é um algoritmo de ordenação eficiente e popular, baseado no princípio de **divisão e conquista**. Desenvolvido por **Tony Hoare** em **1960**, este algoritmo é amplamente utilizado devido à sua simplicidade e excelente desempenho em grandes volumes de dados.
+
+**Curiosidade:** Tony Hoare também é conhecido pela "Hipótese do Buraco de Memória" e pela famosa "Null Pointer Exception", que ele chamou de seu "maior erro".
+
+---
+
+## Motivação
+
+O Quick Sort foi criado para resolver problemas de ordenação em situações onde o desempenho e a flexibilidade são cruciais. Sua principal força está em dividir o problema em subproblemas menores, utilizando um elemento chamado **pivô** para realizar essa separação.
+
+Essa abordagem adaptável torna o Quick Sort ideal para aplicações que lidam com dados dispostos de formas variadas.
 
 ---
 
@@ -10,247 +20,187 @@ O **Quick Sort** é um algoritmo de ordenação eficiente baseado na técnica de
 
 ### Passo a Passo
 
-1. **Escolha do Pivô**: Escolha um elemento da lista como pivô. Esse pivô pode ser escolhido de várias maneiras (por exemplo, o primeiro, o último ou o elemento do meio).
-2. **Particionamento**: Organize os elementos de modo que todos os elementos menores que o pivô fiquem à esquerda e todos os maiores fiquem à direita.
-3. **Recursão**: Aplique o Quick Sort recursivamente nas sublistas à esquerda e à direita do pivô até que a lista esteja completamente ordenada.
+1. **Seleção do Pivô**: Escolhe-se um elemento da lista como pivô (geralmente o último elemento ou um escolhido aleatoriamente).
+2. **Particionamento**: Elementos menores que o pivô são movidos para a esquerda, enquanto os maiores vão para a direita.
+3. **Chamada Recursiva**: O processo é repetido recursivamente nas sublistas esquerda e direita até que a lista esteja completamente ordenada.
 
-**Exemplo de Quick Sort:**
+**Exemplo de Funcionamento:**
 
 Lista original: `[10, 7, 8, 9, 1, 5]`
 
-1. Escolha o pivô (por exemplo, o último elemento, `5`).
-2. Particione a lista em relação ao pivô:
-   - Lista após particionamento: `[1, 5, 8, 9, 7, 10]`
-   - O pivô (`5`) está na posição correta.
-3. Recursivamente, aplique o Quick Sort nas sublistas à esquerda (`[1]`) e à direita (`[8, 9, 7, 10]`).
+- Escolhe-se o pivô: `5`
+- Particiona-se: `[1] | 5 | [10, 7, 8, 9]`
+- Recursão à esquerda e à direita até obter `[1, 5, 7, 8, 9, 10]`.
 
 ---
 
-## Complexidade
+## 📊 Complexidade
 
-- **Melhor Caso**: `O(n log n)`
-- **Pior Caso**: `O(n²)` (quando o pivô é mal escolhido)
-- **Caso Médio**: `O(n log n)`
+- **Melhor Caso**: $$O(n \log n)$$ – quando o pivô divide a lista em metades iguais.
+- **Pior Caso**: $$O(n^2)$$ – ocorre quando o pivô é sempre o maior ou menor elemento.
+- **Caso Médio**: $$O(n \log n)$$ – comportamento mais comum.
 
-A complexidade de tempo do Quick Sort pode ser `O(n log n)` no melhor e caso médio, mas no pior caso, pode atingir `O(n²)`. Isso ocorre quando o pivô é constantemente escolhido de forma ineficiente.
+O Quick Sort exige **memória adicional mínima**, pois realiza a ordenação no local (**in-place sorting**).
 
 ---
 
-## Implementação
+## 💻 Implementação
 
-### Python
-
-Aqui está a implementação do **Quick Sort** em Python:
+### Em Python
 
 ```python
-def partition(arr: list[int], low: int, high: int) -> int:
-    """
-    Particiona o array e retorna o índice do ponto de divisão.
+def quick_sort(array):
+    if len(array) <= 1:
+        return array
 
-    Parameters:
-        arr (list[int]): Array de inteiros a ser particionado
-        low (int): Índice inicial da sublista
-        high (int): Índice final da sublista
+    pivô = array[-1]  # Escolhe o último elemento como pivô
+    menores = [x for x in array[:-1] if x <= pivô]
+    maiores = [x for x in array[:-1] if x > pivô]
 
-    Returns:
-        int: Índice do ponto de divisão
-    """
-    pivot = arr[high]
-
-    point = low - 1
-
-    for i in range(low, high):
-        if arr[i] < pivot:
-            point += 1
-            arr[i], arr[point] = arr[point], arr[i]
-
-    arr[point + 1], arr[high] = arr[high], arr[point + 1]
-    return point + 1
-
-def quick_sort(arr: list, low: int, high: int) -> None:
-    """
-    Ordena o array utilizando o algoritmo Quick Sort.
-
-    Parameters:
-        arr (list): Array de inteiros a ser ordenado
-        low (int): Índice inicial da sublista
-        high (int): Índice final da sublista
-    """
-    if low < high:
-        point = partition(arr, low, high)  # Ponto de divisão
-
-        quick_sort(arr, low, point - 1)  # Ordena a parte esquerda do ponto de divisão
-        quick_sort(arr, point + 1, high)  # Ordena a parte direita do ponto de divisão
-
-# Faz com que o algoritmo seja executado diretamente
-if __name__ == "__main__":
-    arr = [12, 11, 13, 5, 6]
-    
-    print("Lista antes de ordenar:", arr)
-    
-    quick_sort(arr, 0, len(arr) - 1)
-    
-    print("Lista ordenada:", arr)
-
+    return quick_sort(menores) + [pivô] + quick_sort(maiores)
 ```
 
-**Explicação do Código:**
-
-1. A função `quick_sort` recebe uma lista e retorna a lista ordenada.
-2. O pivô é escolhido como o último elemento da lista.
-3. A lista é particionada em três partes: elementos menores que o pivô, o próprio pivô e elementos maiores que o pivô.
-4. O Quick Sort é aplicado recursivamente nas sublistas à esquerda e à direita do pivô.
-
----
-
-### C
-
-Aqui está a implementação do **Quick Sort** em C:
+### Em C
 
 ```c
 #include <stdio.h>
 
-/**
- * Troca os valores de duas variáveis entre sí.
- *
- * @param a Primeira variável
- * @param b Segunda variável
- */
-void swap(int *a, int *b)
-{
-    // Guarda o valor de a em c
-    int c = *a;
+void quickSort(int arr[], int low, int high);
+int partition(int arr[], int low, int high);
 
-    // Coloca o valor de b em a
-    *a = *b;
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
 
-    // Coloca o valor de c(a) em b
-    *b = c;
-}
-
-/**
- * Particiona o array e retorna o índice do ponto de divisão.
- *
- * @param arr Array de inteiros a ser particionado
- * @param low Índice inicial da sublista
- * @param high Índice final da sublista
- * @return Índice do ponto de divisão
- */
-int partition(int arr[], int low, int high)
-{
-    int pivot = arr[high]; // Elemento pivô
-
-    // Percorre o array para organizar elementos em relação ao pivô
-    int point = low - 1;
-    for (int j = low; j < high; j++)
-    {
-        if (arr[j] <= pivot)
-        {
-            point++;                    // Incrementa o índice do ponto de divisão
-            swap(&arr[point], &arr[j]); // Troca os elementos
-        }
-    }
-
-    // Coloca o pivô em sua posição correta no array
-    swap(&arr[point + 1], &arr[high]);
-    return point + 1; // Retorna o índice do ponto de divisão
-}
-
-/**
- * Ordena uma lista de inteiros usando o algoritmo Quick Sort.
- *
- * @param arr Array de inteiros a ser ordenado
- * @param low Índice inicial da sublista
- * @param high Índice final da sublista
- */
-void quickSort(int arr[], int low, int high)
-{
-    if (low < high)
-    {
-        // Particiona o array e obtém o ponto de divisão
-        int pt = partition(arr, low, high);
-
-        // Recursivamente ordena a parte esquerda do ponto de divisão
-        quickSort(arr, low, pt - 1);
-
-        // Recursivamente ordena a parte direita do ponto de divisão
-        quickSort(arr, pt + 1, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
     }
 }
 
-int main()
-{
-    // Conjunto de casos de teste
-    int test_cases[][5] = {
-        {12, 11, 13, 5, 6},
-        {3, 1, 4, 1, 5},
-        {10, 9, 8, 7, 6},
-        {1, 2, 3, 4, 5},
-        {5, 3, 8, 6, 2}
-    };
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high]; // Escolhe o último elemento como pivô
+    int i = low - 1;
 
-    // Calcula o número de casos de teste
-    int num_cases = sizeof(test_cases) / sizeof(test_cases[0]);
-
-    // Itera sobre cada caso de teste
-    for (int i = 0; i < num_cases; i++)
-    {
-        int *arr = test_cases[i];
-        int n = sizeof(test_cases[i]) / sizeof(test_cases[i][0]);
-
-        // Exibe a lista antes da ordenação
-        printf("Lista antes de ordenar: ");
-        for (int j = 0; j < n; j++)
-        {
-            printf("%d ", arr[j]);
+    for (int j = low; j < high; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
-        printf("\n");
-
-        // Aplica o Quick Sort na lista
-        quickSort(arr, 0, n - 1);
-
-        // Exibe a lista após a ordenação
-        printf("Lista depois de ordenar: ");
-        for (int j = 0; j < n; j++)
-        {
-            printf("%d ", arr[j]);
-        }
-        printf("\n\n");
     }
-}
 
+    int temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+
+    return i + 1;
+}
 ```
 
-**Explicação do Código:**
+---
 
-1. A função `swap` troca os valores de dois elementos no array.
-2. A função `partition` organiza os elementos em torno de um pivô e retorna a posição final do pivô.
-3. A função `quick_sort` aplica o algoritmo recursivamente nas sublistas à esquerda e à direita do pivô.
+## 🔧 Casos de Uso
+
+- Aplicativos onde a velocidade de ordenação é crucial.
+- Cenários com pouca memória disponível, pois o Quick Sort utiliza pouco espaço adicional.
+- Situações onde a estabilidade da ordenação não é necessária.
 
 ---
 
-## Casos de Uso
+> [!NOTE]
+> Vantagens e Desvantagens
 
-O **Quick Sort** é útil quando:
+- Altamente eficiente em grandes conjuntos de dados.
+- Requer pouca memória adicional.
+- Geralmente mais rápido que outros algoritmos de ordenação.
 
-- Precisamos de um algoritmo rápido para listas grandes, especialmente quando a média de elementos é bem distribuída.
-- O algoritmo é ideal para **ambientes de sistemas embarcados** ou **algoritmos de processamento de dados em tempo real**, onde o desempenho é crucial.
+### ❌ Desvantagens
+
+- Desempenho pode ser prejudicado em listas já ordenadas ou quase ordenadas.
+- Não preserva a estabilidade entre elementos iguais.
 
 ---
 
-## Vantagens e Desvantagens
+## 📝 Curiosidades
 
-### Vantagens
+- O Quick Sort é utilizado em bibliotecas padrão de linguagens como C++ e Python devido à sua eficiência.
+- Linguagens modernas implementam variações do Quick Sort, como o **Dual-Pivot Quick Sort**.
 
-- **Eficiência**: Tem uma complexidade média de tempo de `O(n log n)`, que é muito eficiente para grandes listas.
-- **In-place**: Não exige espaço adicional significativo além do necessário para armazenar a lista.
-- **Flexibilidade**: Pode ser adaptado para diferentes escolhas de pivô (primeiro, último, aleatório, etc.).
+---
 
-### Desvantagens
+## Comparativo com Outros Algoritmos
 
-- **Pior caso**: Se o pivô for mal escolhido, o Quick Sort pode ter uma complexidade de `O(n²)` no pior caso.
-- **Não é estável**: O Quick Sort não preserva a ordem relativa de elementos iguais.
-- **Uso de memória**: A recursão pode levar a um consumo significativo de memória, especialmente para listas muito grandes.
+| Algoritmo      | Melhor Caso | Pior Caso   | Caso Médio  |
+| -------------- | ----------- | ----------- | ----------- |
+| Quick Sort     | O(n \log n) | O(n²)       | O(n \log n) |
+| Merge Sort     | O(n \log n) | O(n \log n) | O(n \log n) |
+| Bubble Sort    | O(n)        | O(n²)       | O(n²)       |
+| Insertion Sort | O(n)        | O(n²)       | O(n²)       |
+
+---
+
+> [!IMPORTANT]  
+> Elementos Repetidos no Quick Sort
+
+Em listas com elementos repetidos, o Quick Sort pode alterar a ordem relativa desses elementos, já que não é estável. Contudo, ele agrupa todas as ocorrências do mesmo valor de forma eficiente.
+
+---
+
+## 🔍 Importância dos Algoritmos de Ordenação
+
+Os algoritmos de ordenação são essenciais para:
+
+- Facilitar buscas eficientes em dados.
+- Auxiliar em operações como fusão de bases de dados.
+- Melhorar o desempenho em aplicações complexas, como inteligência artificial.
+
+---
+
+## 🎯 Quick Sort na Programação Competitiva
+
+No contexto da programação competitiva, o Quick Sort é amplamente utilizado por sua velocidade e simplicidade de implementação. Porém, é fundamental:
+
+- Selecionar o pivô de forma criteriosa (por exemplo, de forma aleatória) para evitar o pior caso.
+- Conhecer bem as limitações e adaptações do algoritmo para diferentes problemas.
+
+---
+
+> [!TIP]
+> Quiz Interativo
+
+1. Qual é a complexidade do Quick Sort no melhor caso?
+
+   - A) O(n)
+   - B) O(n \log n)
+   - C) O(n²)
+
+2. O Quick Sort é um algoritmo:
+
+   - A) Estável
+   - B) Inestável
+   - C) Ambos
+
+3. Em qual ano foi desenvolvido o Quick Sort?
+   - A) 1955
+   - B) 1960
+   - C) 1970
+
+---
+
+## 🌐 Recursos Gráficos na Web
+
+- [Visualgo](https://visualgo.net/en/sorting)
+- [HackerEarth](https://www.hackerearth.com/practice/algorithms/sorting/quick-sort/visualize/)
+
+---
+
+## 🏅 Dicas para o LeetCode
+
+1. **Compreenda bem o problema** antes de começar a codificar.
+2. **Pratique diferentes variações** do Quick Sort (pivô fixo, aleatório, etc.).
+3. **Teste casos extremos** para assegurar eficiência.
+4. **Pratique regularmente** para aprimorar suas habilidades.
 
 ---
 
@@ -258,11 +208,11 @@ O **Quick Sort** é útil quando:
 
 ![type:video](https://www.youtube.com/embed/nV_WE8SEuGE?si=mmKkww2e7E-QSfPS)
 
-[:fontawesome-brands-youtube: Link direto](https://www.youtube.com/watch?v=nV_WE8SEuGE){ .md-button }
-
 ---
 
-## Referências
+Esses detalhes adicionais enriquecem a documentação do Merge Sort e ajudam a compreender melhor sua importância na ciência da computação.
+
+Citação:
 
 - [Wikipedia - Quick Sort](https://en.wikipedia.org/wiki/Quicksort)
 - **Livro**: _Entendendo Algoritmos_, Aditya Y. Bhargava.

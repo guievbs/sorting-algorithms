@@ -5,6 +5,7 @@ repo_name: "sorting-algorithms"
 site_dir: site
 
 theme:
+  favicon: images/favicon.png
   icon:
     repo: fontawesome/brands/github
   name: material

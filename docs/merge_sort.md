@@ -5,6 +5,7 @@
 O **Merge Sort** é um algoritmo de ordenação eficiente que utiliza a técnica de **divisão e conquista**. Criado por **[John von Neumann](https://pt.wikipedia.org/wiki/John_von_Neumann)** em **1945**, este algoritmo se destaca pela sua eficiência e estabilidade, sendo amplamente utilizado em aplicações que exigem alta performance na ordenação de dados.
 
 ###### Curiosidade sobre o Neumnn: "As festas em casa de von Neumann eram frequentes, famosas, e longas."
+
 ---
 
 ## Motivação do Uso e Desenvolvimento
@@ -18,9 +19,7 @@ O Merge Sort foi desenvolvido para resolver problemas de ordenação em grandes 
 ### Passo a Passo
 
 1. **🪓 Divisão**: A lista é dividida ao meio até que cada sublista tenha apenas um elemento.
-   
 2. **🤝 Conquista**: Cada sublista é ordenada recursivamente.
-   
 3. **🔗 Mesclagem (Merge)**: As sublistas ordenadas são combinadas, comparando os elementos e organizando-os em ordem crescente.
 
 **Exemplo de Divisão e Mesclagem:**
@@ -29,7 +28,7 @@ Lista original: `[38, 27, 43, 3, 9, 82, 10]`
 
 - **Divisão**:  
   `[38, 27, 43]` e `[3, 9, 82, 10]`  
-  ``, `[27, 43]` e `[3, 9]`, `[82, 10]`
+  ``, `[27, 43]`e`[3, 9]`, `[82, 10]`
 
 - **Mesclagem**:  
   `[27, 38, 43]` e `[3, 9, 10, 82]`  
@@ -39,9 +38,11 @@ Lista original: `[38, 27, 43, 3, 9, 82, 10]`
 
 ## 📊 Complexidade
 
-- **Melhor Caso**: $$O(n \log n)$$
-- **Pior Caso**: $$O(n \log n)$$
-- **Caso Médio**: $$O(n \log n)$$
+s
+
+- **Melhor Caso**: O(n \log n)
+- **Pior Caso**: O(n \log n)
+- **Caso Médio**: O(n \log n)
 
 O Merge Sort requer **espaço adicional** de $$O(n)$$ devido à criação de sublistas para a mesclagem.
 
@@ -110,9 +111,9 @@ void merge(int arr[], int inicio, int meio, int fim) {
     int i = inicio;
     int j = meio + 1;
     int k = inicio;
-    
+
     int *temp = malloc((fim - inicio + 1) * sizeof(int));
-    
+
     while (i <= meio && j <= fim) {
         if (arr[i] <= arr[j]) {
             temp[k++] = arr[i++];
@@ -120,19 +121,19 @@ void merge(int arr[], int inicio, int meio, int fim) {
             temp[k++] = arr[j++];
         }
     }
-    
+
     while (i <= meio) {
         temp[k++] = arr[i++];
     }
-    
+
     while (j <= fim) {
         temp[k++] = arr[j++];
     }
-    
+
     for (i = inicio; i <= fim; i++) {
         arr[i] = temp[i];
     }
-    
+
     free(temp);
 }
 ```
@@ -147,7 +148,8 @@ void merge(int arr[], int inicio, int meio, int fim) {
 
 ---
 
-## ⚖️ Vantagens e Desvantagens
+> [!NOTE]
+> Vantagens e Desvantagens
 
 ### ✅ Vantagens
 
@@ -162,7 +164,7 @@ void merge(int arr[], int inicio, int meio, int fim) {
 
 ---
 
-## Curiosidades
+## 📝 Curiosidades
 
 - O Merge Sort é frequentemente utilizado em linguagens como Lisp devido à sua eficiência na manipulação de listas encadeadas.
 - É o algoritmo base para o TimSort utilizado no Python e Java.
@@ -171,21 +173,23 @@ void merge(int arr[], int inicio, int meio, int fim) {
 
 ## Gráfico Comparativo com Outros Algoritmos
 
-| Algoritmo     | Melhor Caso | Pior Caso | Caso Médio |
-|---------------|-------------|-----------|------------|
-| Merge Sort    | O(n \log n) | (n \log n) | (n \log n) |
-| Quick Sort    | O(n \log n) | O(n²) | O(n \log n) |
-| Bubble Sort   | O(n)       | O(n²) | O(n²) |
-| Insertion Sort| O(n)       | O(n²) | O(n²) |
+| Algoritmo      | Melhor Caso | Pior Caso  | Caso Médio  |
+| -------------- | ----------- | ---------- | ----------- |
+| Merge Sort     | O(n \log n) | (n \log n) | (n \log n)  |
+| Quick Sort     | O(n \log n) | O(n²)      | O(n \log n) |
+| Bubble Sort    | O(n)        | O(n²)      | O(n²)       |
+| Insertion Sort | O(n)        | O(n²)      | O(n²)       |
 
 ---
 
-### Como o Merge Sort se comporta em listas com elementos repetidos
+> [!IMPORTANT]  
+> Elementos Repetidos no Merge sort
 
 O Merge Sort é um algoritmo de ordenação que se comporta de maneira eficiente e estável, mesmo em listas que contêm elementos repetidos.
 
-- O algoritmo divide a lista em sublistas até que cada sublista contenha apenas um elemento. Isso significa que, se houver elementos repetidos, cada um deles será tratado como uma entidade separada durante a divisão. Durante a fase de mesclagem, os elementos das sublistas são comparados. Se dois elementos iguais forem encontrados (por exemplo, duas instâncias do número 5), o algoritmo os manterá na mesma ordem em que foram encontrados nas sublistas originais. 
+- O algoritmo divide a lista em sublistas até que cada sublista contenha apenas um elemento. Isso significa que, se houver elementos repetidos, cada um deles será tratado como uma entidade separada durante a divisão. Durante a fase de mesclagem, os elementos das sublistas são comparados. Se dois elementos iguais forem encontrados (por exemplo, duas instâncias do número 5), o algoritmo os manterá na mesma ordem em que foram encontrados nas sublistas originais.
 - Isso ocorre porque, ao mesclar, o Merge Sort sempre pega o primeiro elemento disponível de cada sublista. Se ambos os elementos forem iguais, o elemento da sublista à esquerda será escolhido primeiro, preservando sua posição relativa. Após todas as mesclagens, os elementos duplicados aparecerão lado a lado na lista ordenada final. Por exemplo, ao ordenar a lista [4, 2, 5, 5, 1], o resultado será [1, 2, 4, 5, 5], onde os dois 5 permanecem na mesma ordem relativa.
+
 ---
 
 ## Importância dos Algoritmos de Ordenação
@@ -204,22 +208,23 @@ A programação competitiva envolve resolver problemas complexos sob restriçõe
 
 ---
 
-## Quiz Interativo
+> [!TIP]
+> Quiz Interativo
 
 1. Qual é a complexidade do Merge Sort no pior caso?
-   - A) O(n)
-   - B) O(n \log n)
-   - C) O(n²)
+   A) O(n)
+   B) O(n \log n)
+   C) O(n²)
 
 2. O Merge Sort é um algoritmo:
-   - A) Estável
-   - B) Inestável
-   - C) Ambos
+   A) Estável
+   B) Inestável
+   C) Ambos
 
 3. Em qual ano John von Neumann desenvolveu o Merge Sort?
-   - A) 1940
-   - B) 1945
-   - C) 1950
+   A) 1940
+   B) 1945
+   C) 1950
 
 ---
 
@@ -241,23 +246,16 @@ Para visualizar o funcionamento do Merge Sort e comparar com outros algoritmos:
 
 ---
 
-## Apêndice: Começando com Python e C
+## 🎥 Vídeo Explicativo
 
-### Python
-Para começar com Python:
-- Instale Python via [python.org](https://www.python.org).
-- Utilize IDEs como PyCharm ou Jupyter Notebook para desenvolver seus projetos.
-
-### C
-Para começar com C:
-- Instale um compilador como GCC ou use IDEs como Code::Blocks ou Dev-C++.
-- Familiarize-se com conceitos básicos como ponteiros e alocação dinâmica.
+![type:video](https://www.youtube.com/embed/nV_WE8SEuGE?si=mmKkww2e7E-QSfPS)
 
 ---
 
 Esses detalhes adicionais enriquecem a documentação do Merge Sort e ajudam a compreender melhor sua importância na ciência da computação.
 
 Citação:
+
 - [Wikipedia](https://en.wikipedia.org/wiki/Merge_Sort)
 - [Stackoverflow](https://stackoverflow.com/questions/73733319/comparison-using-merge-sort)
 - [Visualgo](https://visualgo.net/en/sorting)
