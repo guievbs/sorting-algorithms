@@ -27,8 +27,7 @@ O Merge Sort foi desenvolvido para resolver problemas de ordenação em grandes 
 Lista original: `[38, 27, 43, 3, 9, 82, 10]`
 
 - **Divisão**:  
-  `[38, 27, 43]` e `[3, 9, 82, 10]`  
-  ``, `[27, 43]`e`[3, 9]`, `[82, 10]`
+  `[38, 27, 43]` e `[3, 9, 82, 10]` , `[27, 43]` e `[3, 9]`, `[82, 10]`
 
 - **Mesclagem**:  
   `[27, 38, 43]` e `[3, 9, 10, 82]`  
@@ -37,8 +36,6 @@ Lista original: `[38, 27, 43, 3, 9, 82, 10]`
 ---
 
 ## 📊 Complexidade
-
-s
 
 - **Melhor Caso**: O(n \log n)
 - **Pior Caso**: O(n \log n)
@@ -236,9 +233,7 @@ Para visualizar o funcionamento do Merge Sort e comparar com outros algoritmos:
 
 ## 🎥 Vídeo Explicativo
 
-![type:video](https://www.youtube.com/embed/nV_WE8SEuGE?si=mmKkww2e7E-QSfPS)
-
----
+## [:fontawesome-brands-youtube: Link do vídeo](https://drive.google.com/file/d/1L50g_bZKZZPuRu2dPJJEqaYPnsDqzABX/view?usp=drive_link){ .md-button }
 
 ## Referências
 

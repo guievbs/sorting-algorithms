@@ -210,7 +210,7 @@ Dominar o Heap Sort é uma habilidade fundamental na programação competitiva. 
 
 ## 🎥 Vídeo Explicativo
 
-![type:video](https://www.youtube.com/embed/B7zPaLFAXQg?si=JJq64n8WPU62eZtS)
+## [:fontawesome-brands-youtube: Link do vídeo](https://drive.google.com/file/d/1TjtVGY_DBz_H0U17XokO4fUZY1g3CvnT/view?usp=drive_link){ .md-button }
 
 ---
 
