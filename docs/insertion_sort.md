@@ -100,7 +100,7 @@ void insertionSort(int arr[], int n) {
 ### ❌ Desvantagens
 
 - Ineficiente para listas grandes.
-- Complexidade $$O(n^2)$$ em muitos cenários.
+- Complexidade O(n²) em muitos cenários.
 
 ---
 
