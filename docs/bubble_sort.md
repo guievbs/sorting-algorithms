@@ -174,7 +174,7 @@ Na programação competitiva, o Bubble Sort não é amplamente utilizado devido 
 
 ## 🎥 Vídeo Explicativo
 
-![type:video](https://www.youtube.com/embed/nV_WE8SEuGE?si=mmKkww2e7E-QSfPS)
+## [:fontawesome-brands-youtube: Link do vídeo](https://drive.google.com/file/d/1UG4JikH2-MuZ5XG_0jU7C6aupzuaraG3/view?usp=drive_link){ .md-button }
 
 ---
 
