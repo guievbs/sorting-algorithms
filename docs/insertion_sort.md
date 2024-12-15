@@ -138,7 +138,7 @@ Os algoritmos de ordenação são essenciais na computação para:
 
 ---
 
-## Programção Competitiva
+## Programação Competitiva
 
 Embora o Insertion Sort seja pouco usado em competições devido à sua ineficiência em dados grandes, ele é uma opção inicial simples para prototipação e aprendizado.
 
