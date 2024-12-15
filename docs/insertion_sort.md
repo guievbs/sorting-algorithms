@@ -6,7 +6,7 @@ O **Insertion Sort** é um algoritmo simples e eficiente para ordenar listas peq
 
 ---
 
-## Motivção do Uso e Desenvolvimento
+## Motivação do Uso e Desenvolvimento
 
 O Insertion Sort é muito útil em situações onde a simplicidade da implementação é crucial e os conjuntos de dados são pequenos ou quase ordenados. Sua abordagem intuitiva faz com que seja uma escolha popular para ensino de algoritmos de ordenação.
 
