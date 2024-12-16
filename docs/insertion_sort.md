@@ -171,7 +171,7 @@ Embora o Insertion Sort seja pouco usado em competições devido à sua inefici�
 
 ## 🎥 Vídeo Explicativo
 
-## [:fontawesome-brands-youtube: Link do vídeo](https://drive.google.com/file/d/1UG4JikH2-MuZ5XG_0jU7C6aupzuaraG3/view?usp=drive_link){ .md-button }
+## [:fontawesome-brands-youtube: Link do vídeo](https://drive.google.com/file/d/1UG4JikH2-MuZ5XG_0jU7C6aupzuaraG3/view?usp=sharing){ .md-button }
 
 ---
 

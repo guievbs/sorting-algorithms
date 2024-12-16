@@ -222,7 +222,7 @@ Na programação competitiva, algoritmos como o Counting Sort podem ser muito ú
 
 ## 🎥 Vídeo Explicativo
 
-## [:fontawesome-brands-youtube: Link do vídeo](https://drive.google.com/file/d/1TjtVGY_DBz_H0U17XokO4fUZY1g3CvnT/view?usp=drive_link){ .md-button }
+## [:fontawesome-brands-youtube: Link do vídeo](https://drive.google.com/file/d/1TjtVGY_DBz_H0U17XokO4fUZY1g3CvnT/view?usp=sharing){ .md-button }
 
 ---
 

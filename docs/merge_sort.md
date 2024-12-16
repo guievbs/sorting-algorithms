@@ -233,7 +233,7 @@ Para visualizar o funcionamento do Merge Sort e comparar com outros algoritmos:
 
 ## 🎥 Vídeo Explicativo
 
-## [:fontawesome-brands-youtube: Link do vídeo](https://drive.google.com/file/d/1L50g_bZKZZPuRu2dPJJEqaYPnsDqzABX/view?usp=drive_link){ .md-button }
+## [:fontawesome-brands-youtube: Link do vídeo](https://drive.google.com/file/d/1L50g_bZKZZPuRu2dPJJEqaYPnsDqzABX/view?usp=sharing){ .md-button }
 
 ## Referências
 

@@ -192,7 +192,7 @@ No contexto da programação competitiva, o Quick Sort é amplamente utilizado p
 
 ## 🎥 Vídeo Explicativo
 
-[:fontawesome-brands-youtube: Link do vídeo](https://drive.google.com/file/d/1H9Vi2igAvRAlFv8esDIs1FGfAUZypYjc/view?usp=drive_link){ .md-button }
+[:fontawesome-brands-youtube: Link do vídeo](https://drive.google.com/file/d/1H9Vi2igAvRAlFv8esDIs1FGfAUZypYjc/view?usp=sharing){ .md-button }
 
 ---
 
