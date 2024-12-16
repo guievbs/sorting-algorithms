@@ -75,7 +75,7 @@ Toda a documentação e os códigos estarão organizados e disponíveis no [GitH
 - [Guilherme Sebastião](https://github.com/guievbs)
 - [Matheus Marinho](https://github.com/MatheusMari)
 - [Gabriel Floriano](https://github.com/gabrielflorianoo)
-- [Robsonl Carvalho](https://github.com/robsonldcarvalho)
+- [Robson Carvalho](https://github.com/robsonldcarvalho)
 
 ---
 
